@@ -342,6 +342,17 @@ th {
   background: var(--accent-strong);
 }
 
+.action-btn.warning {
+  border-color: var(--warning);
+  color: #92400e;
+  font-weight: 700;
+}
+
+.action-btn.warning:hover {
+  background: var(--warning);
+  color: #fff;
+}
+
 .action-btn.danger {
   border-color: var(--danger);
   color: var(--danger);

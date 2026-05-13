@@ -366,7 +366,7 @@ function render() {
           <button class="action-btn" onclick="sendCommand('${device.id}', 'recreate_webview')" title="Reiniciar WebView">Tela</button>
           <button class="action-btn" onclick="toggleAudio('${device.id}')" title="Ativar/desativar audio">${device.audioEnabled ? "Mudo" : "Som"}</button>
           <button class="action-btn" onclick="sendCommand('${device.id}', 'clear_cache')" title="Limpar cache">Cache</button>
-          <button class="action-btn" onclick="sendCommand('${device.id}', 'restart_app')" title="Reiniciar aplicativo">App</button>
+          <button class="action-btn warning" onclick="sendMaintenanceMode('${device.id}')" title="Modo manutencao - fecha o app na TV">Manut</button>
           <button class="action-btn" onclick="editDeviceVoice('${device.id}')" title="Trocar voz do narrador">Voz</button>
           <button class="action-btn" onclick="showDeviceLogs('${device.id}')" title="Ver logs do dispositivo">Logs</button>
           <button class="action-btn danger" onclick="deleteDevice('${device.id}')" title="Excluir dispositivo">X</button>
@@ -619,6 +619,19 @@ window.toggleAudio = async (deviceId) => {
     alert(nextAudioState ? "Audio ativado na TV." : "Audio mutado na TV.");
   }
   await refresh();
+};
+
+window.sendMaintenanceMode = async (deviceId) => {
+  const device = state.devices.find((item) => item.id === deviceId);
+  if (!device) return;
+  const confirmed = confirm(
+    `Modo Manutencao\n\nIsso vai FECHAR o aplicativo na TV "${device.name}".\n\nVoce podera fazer manutencao no dispositivo.\nPara voltar, reinicie o app manualmente na TV.\n\nContinuar?`
+  );
+  if (!confirmed) return;
+  const result = await sendCommand(deviceId, "close_app");
+  if (result.delivered) {
+    alert("Comando enviado! O app sera fechado na TV.");
+  }
 };
 
 window.deleteDevice = async (deviceId) => {

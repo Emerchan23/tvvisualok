@@ -1291,11 +1291,13 @@ class MainActivity : AppCompatActivity() {
         nativeRoomText = TextView(this)
         nativeRoomText.text = "--"
         nativeRoomText.setTextColor(0xFF1A5A3A.toInt())
-        nativeRoomText.textSize = sp(32f)
+        nativeRoomText.textSize = sp(28f)
         nativeRoomText.gravity = Gravity.CENTER
         nativeRoomText.typeface = Typeface.DEFAULT_BOLD
+        nativeRoomText.maxLines = 1
+        nativeRoomText.ellipsize = TextUtils.TruncateAt.END
         roomBlock.addView(nativeRoomText, LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         ).apply {
             topMargin = dp(4)
@@ -1892,21 +1894,6 @@ class MainActivity : AppCompatActivity() {
             badge.setPadding(dp(8), dp(4), dp(8), dp(4))
             badge.background = createPillDrawable(priorityStyle.accentColor, priorityStyle.accentColor)
             row.addView(badge, LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                marginStart = dp(8)
-            })
-        }
-
-        // Hora (lado direito)
-        if (call.updatedAt.isNotBlank()) {
-            val time = TextView(this)
-            time.text = formatSigssTime(call.updatedAt)
-            time.setTextColor(theme.mutedColor)
-            time.textSize = sp(12f)
-            time.gravity = Gravity.END
-            row.addView(time, LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
@@ -3536,7 +3523,7 @@ class MainActivity : AppCompatActivity() {
             "restart_app" -> {
                 restartApp()
             }
-            "enter_maintenance" -> {
+            "enter_maintenance", "close_app" -> {
                 enterMaintenanceMode()
             }
             "set_audio" -> {
