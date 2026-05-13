@@ -477,6 +477,7 @@ function openDialog(device = null) {
   $("#deviceGroup").value = device?.group || "";
   $("#deviceUrl").value = device?.currentUrl || "";
   $("#deviceFallback").value = device?.fallbackUrl || "";
+  $("#deviceThemeId").value = device?.themeId || "sus_verde";
   $("#deviceDisplayMode").value = device?.displayMode || "panel_only";
   $("#deviceMediaUrl").value = device?.mediaUrl || "";
   $("#deviceMediaLabel").value = device?.mediaLabel || "";
@@ -599,6 +600,7 @@ window.openPairingApproval = async (pairingId) => {
   $("#pairingDeviceGroup").value = "";
   $("#pairingDeviceUrl").value = "about:blank";
   $("#pairingDeviceFallback").value = "about:blank";
+  $("#pairingThemeId").value = "sus_verde";
   $("#pairingDisplayMode").value = "panel_only";
   $("#pairingMediaUrl").value = "";
   $("#pairingMediaLabel").value = "";
@@ -626,6 +628,7 @@ $("#confirmApprovePairingBtn").addEventListener("click", async (event) => {
         group: $("#pairingDeviceGroup").value,
         currentUrl: $("#pairingDeviceUrl").value || "about:blank",
         fallbackUrl: $("#pairingDeviceFallback").value || "about:blank",
+        themeId: $("#pairingThemeId").value || "sus_verde",
         displayMode: $("#pairingDisplayMode").value || "panel_only",
         mediaUrl: $("#pairingMediaUrl").value || "",
         mediaLabel: $("#pairingMediaLabel").value || "",
@@ -879,6 +882,7 @@ $("#saveDeviceBtn").addEventListener("click", async (event) => {
     group: $("#deviceGroup").value,
     currentUrl: $("#deviceUrl").value || "about:blank",
     fallbackUrl: $("#deviceFallback").value || "about:blank",
+    themeId: $("#deviceThemeId").value || "sus_verde",
     displayMode: $("#deviceDisplayMode").value || "panel_only",
     mediaUrl: $("#deviceMediaUrl").value || "",
     mediaLabel: $("#deviceMediaLabel").value || "",

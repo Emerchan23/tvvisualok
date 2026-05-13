@@ -187,6 +187,7 @@ function publicDevice(device) {
     operatingDays: device.operatingDays || "1,2,3,4,5",
     withinOperatingHours,
     operatingLabel: operatingLabel(device),
+    themeId: device.themeId || "sus_verde",
     displayMode: device.displayMode || "panel_only",
     mediaUrl: device.mediaUrl || "",
     mediaLabel: device.mediaLabel || "",
@@ -297,6 +298,7 @@ function normalizeRestoredDevice(device) {
       operatingStart: device.operatingStart,
       operatingEnd: device.operatingEnd,
       operatingDays: device.operatingDays,
+      themeId: device.themeId,
       displayMode: device.displayMode,
       mediaUrl: device.mediaUrl,
       mediaLabel: device.mediaLabel,
@@ -1067,6 +1069,7 @@ function createDevice(body, activationToken = token()) {
     operatingStart: body.operatingStart || "07:00",
     operatingEnd: body.operatingEnd || "18:00",
     operatingDays: body.operatingDays || "1,2,3,4,5",
+    themeId: body.themeId || "sus_verde",
     displayMode: normalizeDisplayMode(body.displayMode),
     mediaUrl: sanitizeMediaUrl(body.mediaUrl),
     mediaLabel: sanitizeMediaLabel(body.mediaLabel || body.mediaUrl || ""),
@@ -1345,6 +1348,7 @@ async function handleApi(req, res, url) {
       operatingStart: body.operatingStart || "07:00",
       operatingEnd: body.operatingEnd || "18:00",
       operatingDays: body.operatingDays || "1,2,3,4,5",
+      themeId: body.themeId,
       displayMode: body.displayMode,
       mediaUrl: body.mediaUrl,
       mediaLabel: body.mediaLabel,
@@ -1410,6 +1414,7 @@ async function handleApi(req, res, url) {
     if (body.operatingStart !== undefined) device.operatingStart = String(body.operatingStart || "07:00");
     if (body.operatingEnd !== undefined) device.operatingEnd = String(body.operatingEnd || "18:00");
     if (body.operatingDays !== undefined) device.operatingDays = String(body.operatingDays || "1,2,3,4,5");
+    if (body.themeId !== undefined) device.themeId = body.themeId || "sus_verde";
     if (body.displayMode !== undefined) device.displayMode = normalizeDisplayMode(body.displayMode);
     if (body.mediaUrl !== undefined) device.mediaUrl = sanitizeMediaUrl(body.mediaUrl);
     if (body.mediaLabel !== undefined || body.mediaUrl !== undefined) {
@@ -1616,6 +1621,7 @@ function deviceConfig(device) {
     currentUrl: device.currentUrl,
     fallbackUrl: device.fallbackUrl || state.settings.fallbackUrl,
     audioEnabled: device.audioEnabled,
+    themeId: device.themeId || "sus_verde",
     displayMode: normalizeDisplayMode(device.displayMode),
     mediaUrl: sanitizeMediaUrl(device.mediaUrl),
     mediaLabel: sanitizeMediaLabel(device.mediaLabel || device.mediaUrl || ""),
