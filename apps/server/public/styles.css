@@ -281,8 +281,18 @@ th {
 }
 
 .url-cell {
-  max-width: 300px;
-  word-break: break-word;
+  max-width: 180px;
+}
+
+.url-truncated {
+  display: block;
+  font-weight: 600;
+  color: var(--accent);
+  cursor: help;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
 }
 
 .actions {
@@ -294,6 +304,53 @@ th {
 .actions button {
   min-height: 34px;
   padding: 0 10px;
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  min-width: 180px;
+}
+
+.action-btn {
+  min-height: 32px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.action-btn:hover {
+  border-color: var(--accent);
+  background: #f0fdf9;
+}
+
+.action-btn.primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.action-btn.primary:hover {
+  background: var(--accent-strong);
+}
+
+.action-btn.danger {
+  border-color: var(--danger);
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.action-btn.danger:hover {
+  background: var(--danger);
+  color: #fff;
 }
 
 .events,

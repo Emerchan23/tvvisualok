@@ -115,15 +115,51 @@ function voiceLabelForValue(value) {
 
 function displayModeLabel(value) {
   if (value === "panel_with_media") return "Painel + video";
-  if (value === "panel_idle_media") return "Painel normal + espera com video";
+  if (value === "panel_idle_media") return "Video no modo espera";
   return "Somente painel";
 }
 
 function mediaSummary(device) {
-  if (!["panel_with_media", "panel_idle_media"].includes(device.displayMode)) return "Sem video lateral";
+  if (!["panel_with_media", "panel_idle_media"].includes(device.displayMode)) return "";
   const label = String(device.mediaLabel || "").trim();
   const url = String(device.mediaUrl || "").trim();
-  return label || url || "Video lateral aguardando configuracao";
+  if (label) return label;
+  if (url) return truncateUrl(url, 25);
+  return "Sem video";
+}
+
+function truncateUrl(url, maxLen = 35) {
+  if (!url || url === "about:blank") return "about:blank";
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace(/^www\./, "");
+    const path = parsed.pathname;
+    const shortPath = path.length > 15 ? path.slice(0, 12) + "..." : path;
+    const result = host + (shortPath !== "/" ? shortPath : "");
+    return result.length > maxLen ? result.slice(0, maxLen - 3) + "..." : result;
+  } catch {
+    return url.length > maxLen ? url.slice(0, maxLen - 3) + "..." : url;
+  }
+}
+
+function themeLabel(themeId) {
+  const themes = {
+    sus_verde: "SUS Verde",
+    hospital_azul: "Hospital Azul",
+    clinica_moderna: "Clinica Moderna",
+    emergencia: "Emergencia",
+    dark_modern: "Escuro",
+    high_contrast: "Alto Contraste"
+  };
+  return themes[themeId] || "";
+}
+
+function voiceLabelShort(value) {
+  if (!value) return "Padrao";
+  const found = state.availableVoices.find((v) => v.name === value);
+  if (!found) return value.split(" ")[0] || "Custom";
+  const label = found.label || found.displayName || found.name || "";
+  return label.split(" ").slice(0, 2).join(" ");
 }
 
 function populateVoiceSelect(selectSelector, currentValue = "") {
@@ -313,25 +349,27 @@ function render() {
         <span class="small">${escapeHtml(device.location || "Sem local")} | ${escapeHtml(device.group || "Sem grupo")}</span>
         <span class="small">IP: ${escapeHtml(device.ipAddress || device.lastIpAddress || "nao informado")}</span>
         <span class="small">Monitoramento: ${escapeHtml(device.operatingLabel || "24 horas")}</span>
-        <span class="small">${escapeHtml(device.id)}</span>
       </td>
-      <td>${statusBadge(device)}<span class="small">v${escapeHtml(device.appVersion || "-")}</span></td>
-      <td class="url-cell">${escapeHtml(device.currentUrl || "about:blank")}<span class="small">Fallback: ${escapeHtml(device.fallbackUrl || "-")}</span><span class="small">Perfil: ${escapeHtml(displayModeLabel(device.displayMode))}</span><span class="small">Midia: ${escapeHtml(mediaSummary(device))}</span></td>
-      <td>${escapeHtml(playerLabel(device.playerStatus))}<span class="small">Audio: ${device.audioEnabled ? "ativo" : "mudo"}</span><span class="small">Voz salva nesta TV: ${escapeHtml(voiceLabelForValue(device.ttsVoice))}</span><span class="small">Recuperacao: ${Number(device.recoveryCycles || 0)} ciclos</span></td>
-      <td>${Number(device.memoryMb || 0)} MB<span class="small">${Number(device.reloads || 0)} recarregamentos</span><span class="small">${Number(device.webViewRecreates || 0)} telas reiniciadas | ${Number(device.appRestarts || 0)} reinicios</span><span class="small">Rede do painel: ${panelActivityLabel(device)}</span><span class="small">Recuperacoes automaticas: ${Number(device.panelAutoReloads || 0)}</span></td>
+      <td>${statusBadge(device)}<span class="small">v${escapeHtml(device.appVersion || "-")}</span><span class="small">${escapeHtml(device.themeId ? themeLabel(device.themeId) : "")}</span></td>
+      <td class="url-cell">
+        <span class="url-truncated" title="${escapeHtml(device.currentUrl || "about:blank")}">${truncateUrl(device.currentUrl || "about:blank")}</span>
+        <span class="small">${escapeHtml(displayModeLabel(device.displayMode))}</span>
+        <span class="small">${escapeHtml(mediaSummary(device))}</span>
+      </td>
+      <td>${escapeHtml(playerLabel(device.playerStatus))}<span class="small">Audio: ${device.audioEnabled ? "ativo" : "mudo"}</span><span class="small">Voz: ${escapeHtml(voiceLabelShort(device.ttsVoice))}</span></td>
+      <td>${Number(device.memoryMb || 0)} MB<span class="small">${Number(device.reloads || 0)} reloads | ${Number(device.webViewRecreates || 0)} telas</span><span class="small">${panelActivityLabel(device)}</span></td>
       <td>${elapsedHeartbeat(device.lastHeartbeat)}<span class="small">${formatTime(device.lastHeartbeat)}</span></td>
       <td>
-        <div class="actions">
-          <button onclick="editDevice('${device.id}')">Editar</button>
-          <button onclick="sendCommand('${device.id}', 'reload_page')">Recarregar</button>
-          <button onclick="sendCommand('${device.id}', 'recreate_webview')">Reiniciar tela</button>
-          <button onclick="sendCommand('${device.id}', 'clear_cache')">Limpar cache</button>
-          <button onclick="sendCommand('${device.id}', 'restart_app')">Reiniciar app</button>
-          <button onclick="toggleAudio('${device.id}')">${device.audioEnabled ? "Mutar" : "Audio"}</button>
-          <button onclick="editDeviceVoice('${device.id}')">Trocar voz</button>
-          <button onclick="previewDeviceVoice('${device.id}')">Ouvir</button>
-          <button onclick="showDeviceLogs('${device.id}')">Ver Logs</button>
-          <button onclick="deleteDevice('${device.id}')">Excluir</button>
+        <div class="actions-grid">
+          <button class="action-btn primary" onclick="editDevice('${device.id}')" title="Editar configuracoes">Editar</button>
+          <button class="action-btn" onclick="sendCommand('${device.id}', 'reload_page')" title="Recarregar pagina">Reload</button>
+          <button class="action-btn" onclick="sendCommand('${device.id}', 'recreate_webview')" title="Reiniciar WebView">Tela</button>
+          <button class="action-btn" onclick="toggleAudio('${device.id}')" title="Ativar/desativar audio">${device.audioEnabled ? "Mudo" : "Som"}</button>
+          <button class="action-btn" onclick="sendCommand('${device.id}', 'clear_cache')" title="Limpar cache">Cache</button>
+          <button class="action-btn" onclick="sendCommand('${device.id}', 'restart_app')" title="Reiniciar aplicativo">App</button>
+          <button class="action-btn" onclick="editDeviceVoice('${device.id}')" title="Trocar voz do narrador">Voz</button>
+          <button class="action-btn" onclick="showDeviceLogs('${device.id}')" title="Ver logs do dispositivo">Logs</button>
+          <button class="action-btn danger" onclick="deleteDevice('${device.id}')" title="Excluir dispositivo">X</button>
         </div>
       </td>
     </tr>
