@@ -1459,7 +1459,7 @@ class MainActivity : AppCompatActivity() {
             currentDisplayMode == "panel_idle_media" -> "Painel principal ativo com alternancia automatica para midia quando a fila estiver em pausa."
             else -> "Fluxo de paciente inteligente focado na prioridade e clareza visual"
         }
-        nativeCurrentLabelText.text = if (idleSplitMode) "MODO ESPERA" else "CHAMADA ATIVA"
+        nativeCurrentLabelText.text = if (idleSplitMode) "MODO ESPERA" else "CHAMANDO"
         nativeHistoryHintText.text = if (idleSplitMode) {
             "Historico preservado ao lado da midia durante a pausa operacional."
         } else {
