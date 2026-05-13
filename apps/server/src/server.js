@@ -672,7 +672,7 @@ async function synthesizeNaturalSpeech({ text, voiceId, rate, filePath }) {
       settled = true;
       try { child.kill("SIGKILL"); } catch {}
       reject(new Error("natural_tts_timeout"));
-    }, 3000);
+    }, 10000); // 10 segundos para vozes Natural (pode demorar na primeira vez)
     let stderr = "";
     child.stderr.on("data", (chunk) => {
       stderr += chunk.toString("utf8");
@@ -786,12 +786,27 @@ async function previewNaturalSpeech({ text, voiceId, rate }) {
         PTV_TTS_RATE_FLOAT: String(clampNumber(rate, 0.6, 1.4, 1))
       }
     });
+    let settled = false;
+    const timer = setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      try { child.kill("SIGKILL"); } catch {}
+      reject(new Error("natural_preview_timeout"));
+    }, 15000); // 15 segundos para preview (inclui tempo de fala)
     let stderr = "";
     child.stderr.on("data", (chunk) => {
       stderr += chunk.toString("utf8");
     });
-    child.on("error", reject);
+    child.on("error", (error) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      reject(error);
+    });
     child.on("exit", (code) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
       if (code === 0) resolve();
       else reject(new Error(stderr.trim() || `PowerShell TTS preview (Natural) terminou com codigo ${code}`));
     });
@@ -1142,15 +1157,23 @@ async function handleApi(req, res, url) {
       const parsed = parseVoiceValue(voice);
       try {
         if (parsed.type === "natural") {
-          if (isNaturalTtsCoolingDown(parsed.id)) throw new Error("natural_tts_cooling_down");
+          if (isNaturalTtsCoolingDown(parsed.id)) {
+            console.log(`[TTS] Voz Natural em cooldown: ${parsed.id}, usando fallback`);
+            throw new Error("natural_tts_cooling_down");
+          }
+          console.log(`[TTS] Sintetizando com voz Natural: ${parsed.id}`);
           await synthesizeNaturalSpeech({ text, voiceId: parsed.id, rate, filePath });
           naturalTtsFailures.delete(String(parsed.id || ""));
+          console.log(`[TTS] Voz Natural OK: ${parsed.id}`);
         } else {
+          console.log(`[TTS] Sintetizando com voz SAPI: ${voice || "(padrao)"}`);
           await synthesizeWindowsSpeech({ text, voice, rate, pitch, filePath });
         }
       } catch (error) {
+        console.error(`[TTS] Erro na sintese: ${error.message}`);
         if (parsed.type !== "natural") throw error;
         markNaturalTtsFailure(parsed.id);
+        console.log(`[TTS] Voz Natural falhou, usando fallback SAPI`);
         const fallbackVoice = "";
         hash = ttsHash({ text, voice: fallbackVoice, rate, pitch });
         filename = `${hash}.wav`;
