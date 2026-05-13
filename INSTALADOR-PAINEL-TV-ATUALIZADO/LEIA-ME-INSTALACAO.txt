@@ -1,0 +1,10 @@
+﻿INSTALADOR PAINEL TV - ATUALIZADO
+
+1. Execute INSTALAR-PAINEL-WINDOWS.bat no computador servidor.
+2. O instalador cria atalhos na area de trabalho e inicializacao automatica com o Windows.
+3. Abra o painel pelo atalho "Painel TV" ou por http://localhost:8787/.
+4. Instale APKS\Painel-TV-release.apk na TV / TV Box / Fire TV.
+5. Instale APKS\Gestor-Painel-TV-release.apk no celular do gestor se quiser aprovar QR pelo celular.
+6. Configure Telegram, Saude 24/7 e horario de monitoramento por TV no painel.
+
+Observacao: o APK da TV nao precisa do Chrome externo; usa WebView interno e ponte de narracao nativa.

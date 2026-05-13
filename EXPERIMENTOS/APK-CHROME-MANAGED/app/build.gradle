@@ -1,0 +1,42 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "br.com.paineltv.firetv"
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "br.com.paineltv.chrome.managed"
+        minSdk 23
+        targetSdk 36
+        versionCode 6
+        versionName "0.6.0-chrome-managed"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("../../android-release.keystore")
+            storePassword "PainelTV@2026"
+            keyAlias "painel-tv"
+            keyPassword "PainelTV@2026"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    implementation "com.squareup.okhttp3:okhttp:4.12.0"
+    implementation "com.google.zxing:core:3.5.3"
+}

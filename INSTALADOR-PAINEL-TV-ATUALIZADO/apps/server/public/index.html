@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paineis Inteligentes</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Operacao de TVs</p>
+        <h1>Paineis Inteligentes</h1>
+      </div>
+      <div class="status-strip">
+        <span id="wsStatus" class="pill muted">Conectando</span>
+        <span id="countOnline" class="metric">0 online</span>
+        <span id="countAlert" class="metric danger">0 alertas</span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="toolbar">
+        <button id="newDeviceBtn" class="primary">Nova TV</button>
+        <button id="refreshBtn">Atualizar</button>
+        <button id="serverBtn">Servidor</button>
+        <button id="healthBtn">Saude 24/7</button>
+        <button id="telegramBtn">Telegram</button>
+        <button id="backupBtn">Backup</button>
+        <button id="manualBtn">Manual</button>
+        <label class="token-field">
+          Token admin
+          <input id="adminToken" type="password" autocomplete="off" />
+        </label>
+        <button id="saveTokenBtn">Salvar token</button>
+        <span class="help-text">Usado para autorizar cadastro, exclusao e pareamento. Padrao local: admin123.</span>
+      </section>
+
+      <section class="summary-grid">
+        <div class="summary-card">
+          <strong id="summaryTotal">0</strong>
+          <span>TVs cadastradas</span>
+        </div>
+        <div class="summary-card ok">
+          <strong id="summaryOnline">0</strong>
+          <span>online agora</span>
+        </div>
+        <div class="summary-card bad">
+          <strong id="summaryProblems">0</strong>
+          <span>alertas ativos</span>
+        </div>
+        <div class="summary-card">
+          <strong id="summaryPairing">0</strong>
+          <span>pareamentos pendentes</span>
+        </div>
+      </section>
+
+      <section class="grid-area">
+        <div class="panel wide">
+          <div class="panel-head">
+            <h2>Dispositivos</h2>
+            <span id="deviceCount">0 TVs</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>TV</th>
+                  <th>Status</th>
+                  <th>URL</th>
+                  <th>Reproducao</th>
+                  <th>Saude</th>
+                  <th>Ultimo sinal</th>
+                  <th>Acoes</th>
+                </tr>
+              </thead>
+              <tbody id="deviceRows"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="panel">
+          <div class="panel-head">
+            <h2>Alertas ativos</h2>
+            <span id="activeAlertCount">0</span>
+          </div>
+          <div id="activeAlertList" class="alerts"></div>
+        </aside>
+
+        <aside class="panel">
+          <div class="panel-head">
+            <h2>Pareamento QR</h2>
+            <span id="pairingCount">0</span>
+          </div>
+          <div id="pairingList" class="pairings"></div>
+        </aside>
+
+        <aside class="panel">
+          <div class="panel-head">
+            <h2>Historico</h2>
+            <span id="eventCount">0</span>
+          </div>
+          <div class="history-filters">
+            <select id="eventDeviceFilter"></select>
+            <select id="eventTypeFilter">
+              <option value="">Todos os tipos</option>
+              <option value="device">Dispositivo</option>
+              <option value="pairing">Pareamento</option>
+              <option value="command">Comando</option>
+              <option value="alert">Alerta</option>
+              <option value="settings">Configuracao</option>
+            </select>
+            <input id="eventDateFilter" type="date" />
+            <button id="clearEventFiltersBtn">Limpar filtros</button>
+          </div>
+          <div id="eventList" class="events"></div>
+        </aside>
+      </section>
+    </main>
+
+    <dialog id="deviceDialog">
+      <form method="dialog" class="dialog-body">
+        <h2 id="dialogTitle">Nova TV</h2>
+        <label>Nome <input id="deviceName" required /></label>
+        <label>Local <input id="deviceLocation" /></label>
+        <label>Grupo <input id="deviceGroup" /></label>
+        <label>URL principal <input id="deviceUrl" placeholder="https://exemplo.com/painel" /></label>
+        <label>URL fallback <input id="deviceFallback" placeholder="about:blank" /></label>
+        <div class="schedule-box">
+          <h3>Formato do painel</h3>
+          <label>Tema visual
+            <select id="deviceThemeId">
+              <option value="classic_warm">Classic Warm</option>
+              <option value="sus_institucional">SUS Institucional</option>
+              <option value="tech_light">Tech Light</option>
+              <option value="hospital_blue">Hospital Blue</option>
+              <option value="contrast_gold">Contrast Gold</option>
+            </select>
+          </label>
+          <label>Perfil
+            <select id="deviceDisplayMode">
+              <option value="panel_only">Somente painel de chamados</option>
+              <option value="panel_with_media">Painel com video/link ao lado</option>
+              <option value="panel_idle_media">Painel normal e, sem chamada, video + ultimas chamadas</option>
+            </select>
+          </label>
+          <label>Nome da unidade <input id="deviceUnitName" placeholder="Ex: Hospital Municipal" /></label>
+          <label>Logo da unidade <input id="deviceUnitLogoUrl" placeholder="/media/logo.png ou https://..." /></label>
+          <div class="upload-row">
+            <input id="deviceUnitLogoFile" type="file" accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" />
+            <button id="deviceUnitLogoUploadBtn" type="button">Enviar logo</button>
+            <button id="deviceUnitLogoClearBtn" type="button">Limpar logo</button>
+          </div>
+          <p id="deviceUnitLogoStatus" class="dialog-copy">Se vazio, a TV usa a identidade padrao salva em Saude 24/7.</p>
+          <label>Link do video ou pagina lateral <input id="deviceMediaUrl" placeholder="https://exemplo.com/video.mp4" /></label>
+          <label>Titulo da midia <input id="deviceMediaLabel" placeholder="Ex: Video institucional" /></label>
+          <div class="upload-row">
+            <input id="deviceMediaFile" type="file" accept="video/mp4,video/webm,video/ogg,video/quicktime,.mp4,.webm,.ogg,.mov,.m4v" />
+            <button id="deviceMediaUploadBtn" type="button">Enviar video</button>
+            <button id="deviceMediaClearBtn" type="button">Limpar midia</button>
+          </div>
+          <p id="deviceMediaStatus" class="dialog-copy">Use esse modo quando quiser manter o painel de chamada nativo e exibir um video ou pagina ao lado.</p>
+        </div>
+        <label class="check"><input id="deviceAudio" type="checkbox" checked /> Audio ativo</label>
+        <label>Voz do narrador
+          <select id="deviceTtsVoice"></select>
+        </label>
+        <div class="schedule-box">
+          <h3>Horario de monitoramento</h3>
+          <label>Tipo
+            <select id="deviceOperatingMode">
+              <option value="always">24 horas, alertar sempre</option>
+              <option value="schedule">Horario programado</option>
+            </select>
+          </label>
+          <div class="schedule-grid">
+            <label>Inicio <input id="deviceOperatingStart" type="time" value="07:00" /></label>
+            <label>Fim <input id="deviceOperatingEnd" type="time" value="18:00" /></label>
+          </div>
+          <div class="weekday-grid" id="deviceOperatingDays">
+            <label><input type="checkbox" value="1" checked /> Seg</label>
+            <label><input type="checkbox" value="2" checked /> Ter</label>
+            <label><input type="checkbox" value="3" checked /> Qua</label>
+            <label><input type="checkbox" value="4" checked /> Qui</label>
+            <label><input type="checkbox" value="5" checked /> Sex</label>
+            <label><input type="checkbox" value="6" /> Sab</label>
+            <label><input type="checkbox" value="0" /> Dom</label>
+          </div>
+          <p class="dialog-copy">Fora desse horario, a TV desligada aparece como fora do horario e nao gera alerta Telegram.</p>
+        </div>
+        <input id="editingDeviceId" type="hidden" />
+        <div id="activationBox" class="activation hidden"></div>
+        <footer>
+          <button type="button" data-close-dialog="deviceDialog">Cancelar</button>
+          <button id="saveDeviceBtn" value="default" class="primary">Salvar</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <dialog id="deleteDialog">
+      <form method="dialog" class="dialog-body">
+        <h2>Excluir TV</h2>
+        <p id="deleteMessage" class="dialog-copy"></p>
+        <input id="deletingDeviceId" type="hidden" />
+        <footer>
+          <button type="button" data-close-dialog="deleteDialog">Cancelar</button>
+          <button id="confirmDeleteBtn" value="default" class="danger">Excluir</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <dialog id="deviceActionsDialog">
+      <form method="dialog" class="dialog-body actions-dialog-body">
+        <h2 id="deviceActionsTitle">Acoes da TV</h2>
+        <p id="deviceActionsInfo" class="dialog-copy"></p>
+        <div class="actions-grid">
+          <section class="action-group">
+            <h3>Acoes rapidas</h3>
+            <div class="action-stack">
+              <button id="actionReloadBtn" type="button">Recarregar pagina</button>
+              <button id="actionRecreateBtn" type="button">Reiniciar tela</button>
+              <button id="actionRestartAppBtn" type="button">Reiniciar app</button>
+            </div>
+          </section>
+          <section class="action-group">
+            <h3>Manutencao</h3>
+            <div class="action-stack">
+              <button id="actionMaintenanceBtn" type="button">Entrar em manutencao</button>
+              <button id="actionClearCacheBtn" type="button">Limpar cache</button>
+              <button id="actionLogsBtn" type="button">Ver logs</button>
+            </div>
+          </section>
+          <section class="action-group">
+            <h3>Audio e voz</h3>
+            <div class="action-stack">
+              <button id="actionToggleAudioBtn" type="button">Alternar audio</button>
+              <button id="actionEditVoiceBtn" type="button">Trocar voz</button>
+              <button id="actionPreviewVoiceBtn" type="button">Ouvir voz</button>
+            </div>
+          </section>
+          <section class="action-group">
+            <h3>Cadastro</h3>
+            <div class="action-stack">
+              <button id="actionEditDeviceBtn" type="button">Editar cadastro</button>
+              <button id="actionDeleteDeviceBtn" type="button" class="danger">Excluir TV</button>
+            </div>
+          </section>
+        </div>
+        <footer>
+          <button type="button" data-close-dialog="deviceActionsDialog">Fechar</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <dialog id="approvePairingDialog">
+      <form method="dialog" class="dialog-body">
+        <h2>Aprovar TV</h2>
+        <p id="pairingApproveInfo" class="dialog-copy"></p>
+        <input id="approvingPairingId" type="hidden" />
+        <label>Nome <input id="pairingDeviceName" required /></label>
+        <label>Local <input id="pairingDeviceLocation" /></label>
+        <label>Grupo <input id="pairingDeviceGroup" /></label>
+        <label>URL inicial <input id="pairingDeviceUrl" value="about:blank" /></label>
+        <label>URL fallback <input id="pairingDeviceFallback" value="about:blank" /></label>
+        <div class="schedule-box">
+          <h3>Formato do painel</h3>
+          <label>Tema visual
+            <select id="pairingThemeId">
+              <option value="classic_warm">Classic Warm</option>
+              <option value="sus_institucional">SUS Institucional</option>
+              <option value="tech_light">Tech Light</option>
+              <option value="hospital_blue">Hospital Blue</option>
+              <option value="contrast_gold">Contrast Gold</option>
+            </select>
+          </label>
+          <label>Perfil
+            <select id="pairingDisplayMode">
+              <option value="panel_only">Somente painel de chamados</option>
+              <option value="panel_with_media">Painel com video/link ao lado</option>
+              <option value="panel_idle_media">Painel normal e, sem chamada, video + ultimas chamadas</option>
+            </select>
+          </label>
+          <label>Nome da unidade <input id="pairingUnitName" placeholder="Ex: Hospital Municipal" /></label>
+          <label>Logo da unidade <input id="pairingUnitLogoUrl" placeholder="/media/logo.png ou https://..." /></label>
+          <div class="upload-row">
+            <input id="pairingUnitLogoFile" type="file" accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" />
+            <button id="pairingUnitLogoUploadBtn" type="button">Enviar logo</button>
+            <button id="pairingUnitLogoClearBtn" type="button">Limpar logo</button>
+          </div>
+          <p id="pairingUnitLogoStatus" class="dialog-copy">Se vazio, a TV usa a identidade padrao salva em Saude 24/7.</p>
+          <label>Link do video ou pagina lateral <input id="pairingMediaUrl" placeholder="https://exemplo.com/video.mp4" /></label>
+          <label>Titulo da midia <input id="pairingMediaLabel" placeholder="Ex: Video institucional" /></label>
+          <div class="upload-row">
+            <input id="pairingMediaFile" type="file" accept="video/mp4,video/webm,video/ogg,video/quicktime,.mp4,.webm,.ogg,.mov,.m4v" />
+            <button id="pairingMediaUploadBtn" type="button">Enviar video</button>
+            <button id="pairingMediaClearBtn" type="button">Limpar midia</button>
+          </div>
+          <p id="pairingMediaStatus" class="dialog-copy">Voce pode aprovar a TV ja com o video lateral configurado.</p>
+        </div>
+        <label class="check"><input id="pairingDeviceAudio" type="checkbox" checked /> Audio ativo</label>
+        <label>Voz do narrador
+          <select id="pairingTtsVoice"></select>
+        </label>
+        <div class="schedule-box">
+          <h3>Horario de monitoramento</h3>
+          <label>Tipo
+            <select id="pairingOperatingMode">
+              <option value="always">24 horas, alertar sempre</option>
+              <option value="schedule">Horario programado</option>
+            </select>
+          </label>
+          <div class="schedule-grid">
+            <label>Inicio <input id="pairingOperatingStart" type="time" value="07:00" /></label>
+            <label>Fim <input id="pairingOperatingEnd" type="time" value="18:00" /></label>
+          </div>
+          <div class="weekday-grid" id="pairingOperatingDays">
+            <label><input type="checkbox" value="1" checked /> Seg</label>
+            <label><input type="checkbox" value="2" checked /> Ter</label>
+            <label><input type="checkbox" value="3" checked /> Qua</label>
+            <label><input type="checkbox" value="4" checked /> Qui</label>
+            <label><input type="checkbox" value="5" checked /> Sex</label>
+            <label><input type="checkbox" value="6" /> Sab</label>
+            <label><input type="checkbox" value="0" /> Dom</label>
+          </div>
+        </div>
+        <footer>
+          <button type="button" data-close-dialog="approvePairingDialog">Cancelar</button>
+          <button id="confirmApprovePairingBtn" value="default" class="primary">Aprovar</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <dialog id="telegramDialog">
+      <form method="dialog" class="dialog-body">
+        <h2>Alertas Telegram</h2>
+        <p class="dialog-copy">Configure um bot para receber aviso quando uma TV ficar offline ou voltar. Para queda total do computador, use tambem o watchdog externo ou monitoramento fora da rede.</p>
+        <label class="check"><input id="telegramEnabled" type="checkbox" /> Ativar alertas</label>
+        <label>Bot token <input id="telegramBotToken" placeholder="123456:ABC..." autocomplete="off" /></label>
+        <label>Chat ID <input id="telegramChatId" placeholder="Ex: 123456789" autocomplete="off" /></label>
+        <p id="telegramStatus" class="dialog-copy"></p>
+        <footer>
+          <button type="button" data-close-dialog="telegramDialog">Fechar</button>
+          <button id="testTelegramBtn" value="default">Testar</button>
+          <button id="saveTelegramBtn" value="default" class="primary">Salvar</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <dialog id="healthDialog">
+      <form method="dialog" class="dialog-body">
+        <h2>Saude 24/7</h2>
+        <p class="dialog-copy">Esses limites sao enviados para os APKs das TVs. Use valores conservadores para paineis com video e narracao.</p>
+        <div class="schedule-box">
+          <h3>Identidade padrao da unidade</h3>
+          <label>Nome da unidade <input id="healthUnitName" placeholder="Ex: Hospital Municipal" /></label>
+          <label>Logo da unidade <input id="healthUnitLogoUrl" placeholder="/media/logo.png ou https://..." /></label>
+          <div class="upload-row">
+            <input id="healthUnitLogoFile" type="file" accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" />
+            <button id="healthUnitLogoUploadBtn" type="button">Enviar logo</button>
+            <button id="healthUnitLogoClearBtn" type="button">Limpar logo</button>
+          </div>
+          <p id="healthUnitLogoStatus" class="dialog-copy">Essa identidade e usada como fallback quando a TV nao tiver nome e logo proprios.</p>
+        </div>
+        <label>Intervalo de sinal da TV em segundos <input id="healthHeartbeat" type="number" min="5" max="300" step="1" /></label>
+        <label>Atualizacao automatica da pagina em segundos <input id="healthAutoRefresh" type="number" min="0" max="3600" step="5" /></label>
+          <label>Reload preventivo em horas (manutencao rara) <input id="healthPreventiveReload" type="number" min="0" max="24" step="1" /></label>
+        <label>Limite de memoria em MB <input id="healthMemoryLimit" type="number" min="128" max="2048" step="1" /></label>
+        <label>Timeout da pagina em segundos <input id="healthPageTimeout" type="number" min="20" max="600" step="1" /></label>
+        <label>URL fallback padrao <input id="healthFallbackUrl" placeholder="about:blank" /></label>
+        <p id="healthStatus" class="dialog-copy"></p>
+        <footer>
+          <button type="button" data-close-dialog="healthDialog">Fechar</button>
+          <button id="saveHealthBtn" value="default" class="primary">Salvar e enviar</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <dialog id="serverDialog">
+      <form method="dialog" class="dialog-body">
+        <h2>Configuracao do servidor</h2>
+        <p id="serverInfo" class="dialog-copy"></p>
+        <label>Porta HTTP <input id="serverPort" type="number" min="1024" max="65535" step="1" /></label>
+        <p class="dialog-copy">Ao mudar a porta, o painel passa a abrir em outro endereco. Exemplo: porta 9090 vira http://localhost:9090/</p>
+        <p id="serverStatus" class="dialog-copy"></p>
+        <footer>
+          <button type="button" data-close-dialog="serverDialog">Fechar</button>
+          <button id="saveServerBtn" value="default">Salvar porta</button>
+          <button id="restartServerBtn" value="default" class="danger">Reiniciar servidor</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <dialog id="backupDialog">
+      <form method="dialog" class="dialog-body">
+        <h2>Backup e restauracao</h2>
+        <p class="dialog-copy">Use o backup antes de formatar ou trocar o computador. O arquivo guarda TVs, URLs, horarios, configuracoes e tokens de ativacao para evitar recadastro.</p>
+        <div class="backup-actions">
+          <button id="exportBackupBtn" type="button" class="primary">Baixar backup</button>
+          <label class="file-picker">Arquivo de backup
+            <input id="backupFileInput" type="file" accept="application/json,.json" />
+          </label>
+          <button id="restoreBackupBtn" type="button" class="danger">Restaurar backup</button>
+        </div>
+        <p class="dialog-copy">A restauracao substitui os cadastros atuais. Depois de restaurar em outro computador, confirme IP/porta e, se necessario, reinicie o servidor.</p>
+        <p id="backupStatus" class="dialog-copy"></p>
+        <footer>
+          <button type="button" data-close-dialog="backupDialog">Fechar</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <dialog id="manualDialog" class="manual-dialog">
+      <form method="dialog" class="dialog-body manual-body">
+        <h2>Manual do sistema</h2>
+        <p class="dialog-copy">Guia rapido para instalar, parear, operar e manter os paineis das TVs funcionando em producao.</p>
+
+        <div class="manual-grid">
+          <section class="manual-card">
+            <span class="manual-icon">TV</span>
+            <h3>O que roda na TV</h3>
+            <p>Instale o APK <strong>Painel TV</strong> na Android TV, TV Box ou Fire TV Stick. Ele abre o painel em tela cheia usando WebView interno, toca o audio localmente e se conecta ao servidor por WebSocket.</p>
+          </section>
+          <section class="manual-card">
+            <span class="manual-icon">QR</span>
+            <h3>Pareamento facil</h3>
+            <p>No app da TV, informe o IP e a porta do computador servidor, gere o QR Code e aprove pelo painel ou pelo app gestor. O token fica salvo na TV depois da aprovacao.</p>
+          </section>
+          <section class="manual-card">
+            <span class="manual-icon">ADM</span>
+            <h3>Aplicativo gestor</h3>
+            <p>O APK gestor e usado pelo administrador para ler o QR Code da TV e aprovar o dispositivo sem digitar token grande na tela.</p>
+          </section>
+          <section class="manual-card">
+            <span class="manual-icon">WEB</span>
+            <h3>Precisa instalar Chrome?</h3>
+            <p>Nao. A TV usa o WebView do Android/Fire OS dentro do proprio aplicativo. Isso evita depender de navegador externo. Para narracao, o app injeta uma ponte de voz nativa quando a pagina usa speechSynthesis.</p>
+          </section>
+          <section class="manual-card">
+            <span class="manual-icon">24/7</span>
+            <h3>Anti-travamento</h3>
+            <p>O app mede memoria, envia heartbeat, faz reload preventivo, recria a WebView, limpa cache, usa fallback e pode reiniciar o app com circuito anti-loop quando falhas continuam.</p>
+          </section>
+          <section class="manual-card">
+            <span class="manual-icon">HORA</span>
+            <h3>Horarios por TV</h3>
+            <p>Cada TV pode ser 24 horas ou ter horario programado. Fora do horario, desligar a TV aparece como fora do horario e nao dispara Telegram de falha.</p>
+          </section>
+          <section class="manual-card">
+            <span class="manual-icon">NET</span>
+            <h3>Ambiente necessario</h3>
+            <p>O computador servidor e as TVs precisam estar na mesma rede ou em uma rede com acesso liberado para o IP/porta configurados. O painel padrao roda em http://IP-DO-PC:8787/.</p>
+          </section>
+        </div>
+
+        <div class="manual-steps">
+          <h3>Como usar na pratica</h3>
+          <ol>
+            <li>Abra este painel no computador servidor e confirme a porta em <strong>Servidor</strong>.</li>
+            <li>Instale o APK <strong>Painel TV</strong> no dispositivo conectado a televisao.</li>
+            <li>No app da TV, informe o endereco do servidor, por exemplo <strong>192.168.68.112:8787</strong>.</li>
+            <li>Gere o QR Code, aprove no painel ou no APK gestor e defina nome, local, grupo, URL inicial e horario de monitoramento.</li>
+            <li>Use <strong>Saude 24/7</strong> para ajustar heartbeat, reload preventivo, memoria maxima e fallback.</li>
+            <li>Configure <strong>Telegram</strong> para receber aviso quando uma TV cair e quando voltar.</li>
+          </ol>
+        </div>
+
+        <footer>
+          <button type="button" data-close-dialog="manualDialog" class="primary">Entendi</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

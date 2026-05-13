@@ -1,0 +1,12 @@
+node_modules/
+dist/
+build/
+.gradle/
+*.log
+apps/server/data/*
+!apps/server/data/.gitkeep
+*.keystore
+*.lnk
+*.zip
+chrome-netlog*.json
+chrome-dom.html

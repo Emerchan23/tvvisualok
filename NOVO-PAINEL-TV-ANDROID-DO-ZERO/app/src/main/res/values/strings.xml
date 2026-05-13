@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Painel TV Novo</string>
+
+    <string name="status_titulo">Status</string>
+    <string name="status_offline">Sem rede. Verifique o Wi‑Fi/cabo.</string>
+    <string name="status_sem_internet">Rede conectada, mas sem acesso à Internet.</string>
+    <string name="status_erro_carregar">Erro ao carregar o painel. Tentando novamente…</string>
+    <string name="status_erro_servidor">Servidor respondeu com erro (%1$d). Tentando novamente…</string>
+    <string name="status_erro_ssl">Erro de segurança (SSL). Verifique data/hora e rede.</string>
+    <string name="status_conectando">Conectando ao gerenciador…</string>
+    <string name="status_configurar_servidor">Esta TV está vinculada, mas o servidor do gerenciador não está configurado. Segure BACK e informe o IP/porta do gerenciador.</string>
+
+    <string name="config_titulo">Configurar painel</string>
+    <string name="config_servidor_hint">Servidor do gerenciador (ex.: http://192.168.0.10:8787)</string>
+    <string name="config_fallback_hint">URL do painel (fallback)</string>
+    <string name="salvar">Salvar</string>
+    <string name="desvincular">Desvincular</string>
+    <string name="cancelar">Cancelar</string>
+
+    <string name="pair_titulo">Conectar TV</string>
+    <string name="pair_instrucoes_1">Para vincular esta TV no seu gerenciador, aperte Conectar. Vai aparecer um QR Code para você aprovar no gerenciador.</string>
+    <string name="pair_instrucoes_2">Servidor atual: %1$s</string>
+    <string name="pair_conectar">Conectar por QR Code</string>
+    <string name="pair_configurar">Configurar</string>
+    <string name="pair_iniciando">Iniciando conexão…</string>
+    <string name="pair_qr_instrucao">Aponte a câmera do celular para o QR Code e aprove no gerenciador.</string>
+    <string name="pair_codigo">Código: %1$s</string>
+    <string name="pair_ip">Servidor: %1$s</string>
+    <string name="pair_erro">Não foi possível iniciar o pareamento. Verifique o servidor e a rede.</string>
+    <string name="pair_tentar_novamente">Tentar novamente</string>
+</resources>

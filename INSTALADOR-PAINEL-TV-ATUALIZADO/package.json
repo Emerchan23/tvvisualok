@@ -1,0 +1,16 @@
+{
+  "name": "painel-tv-inteligente",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sistema de paineis inteligentes para TVs, substituindo RDP por clientes autonomos gerenciados.",
+  "type": "module",
+  "scripts": {
+    "start": "node apps/server/src/server.js",
+    "dev": "node apps/server/src/server.js",
+    "simulate:tv": "node apps/tv-simulator/simulator.js",
+    "check": "node --check apps/server/src/server.js && node --check apps/tv-simulator/simulator.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

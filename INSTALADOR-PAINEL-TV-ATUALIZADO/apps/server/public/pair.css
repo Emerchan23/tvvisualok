@@ -1,0 +1,66 @@
+.pair-page {
+  min-height: 100vh;
+  background: #102027;
+}
+
+.pair-shell {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 18px;
+}
+
+.pair-card {
+  display: grid;
+  gap: 12px;
+  width: min(520px, 100%);
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.pair-card .eyebrow {
+  color: var(--accent);
+}
+
+.pair-card h1 {
+  color: var(--ink);
+}
+
+.pair-card label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+}
+
+.pair-card input {
+  width: 100%;
+}
+
+.pair-card .check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pair-card .check input {
+  width: auto;
+}
+
+.pair-status,
+.result {
+  margin: 0;
+  color: var(--muted);
+}
+
+.result.ok {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.result.bad {
+  color: var(--danger);
+  font-weight: 700;
+}

@@ -1,0 +1,17 @@
+﻿PAINEL TV - INSTALACAO PROFISSIONAL
+
+Depois de instalar:
+- O Painel TV inicia com o Windows em segundo plano.
+- O icone fica nos icones ocultos perto do relogio.
+- Clique duas vezes no icone para abrir o painel.
+- Clique com o botao direito para Abrir, Reiniciar Servidor, Parar Servidor ou Sair.
+- O atalho Painel TV tambem fica na area de trabalho.
+- Os APKs ficam na pasta APKS dentro da instalacao.
+
+TV Android / TV Box:`r`n- Instale APKS\Painel-TV-release.apk na Android TV ou TV Box.`r`n`r`nFire TV Stick:`r`n- Instale APKS\Painel-TV-Fire-Stick-release.apk no Amazon Fire TV Stick.
+
+Gestor:
+- Instale APKS\Gestor-Painel-TV-release.apk no celular do gestor.
+
+O app da TV nao precisa instalar Chrome externo. Ele usa WebView interno e ponte de narracao nativa.
+

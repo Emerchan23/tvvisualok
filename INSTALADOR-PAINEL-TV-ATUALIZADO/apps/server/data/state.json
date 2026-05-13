@@ -1,0 +1,1736 @@
+{
+  "devices": [
+    {
+      "id": "tv_8cd168847e14a6d7",
+      "name": "Nova TV",
+      "location": "",
+      "group": "",
+      "currentUrl": "about:blank",
+      "fallbackUrl": "about:blank",
+      "audioEnabled": true,
+      "operatingMode": "always",
+      "operatingStart": "07:00",
+      "operatingEnd": "18:00",
+      "operatingDays": "1,2,3,4,5",
+      "activationToken": "6YUGJYWOPAUOHEJRPMR6JRPB",
+      "status": "waiting_activation",
+      "ipAddress": "",
+      "lastIpAddress": "",
+      "deviceInfo": {},
+      "playerStatus": "idle",
+      "appVersion": "-",
+      "memoryMb": 0,
+      "reloads": 0,
+      "reconnects": 0,
+      "recoveryCycles": 0,
+      "webViewRecreates": 0,
+      "appRestarts": 0,
+      "lastSuccessfulPageLoadSecondsAgo": -1,
+      "lastWebViewRecreateSecondsAgo": -1,
+      "uptimeSeconds": 0,
+      "lastError": "",
+      "lastHeartbeat": null,
+      "createdAt": "2026-04-21T18:21:41.781Z",
+      "updatedAt": "2026-04-21T18:21:41.781Z"
+    },
+    {
+      "id": "tv_a22b67f21ee5132d",
+      "name": "TV aguardando aprovacao",
+      "location": "",
+      "group": "",
+      "currentUrl": "https://sigss.chapadaodoceu.go.gov.br/unique-panel/panel-screen/dedba94c-6ec7-4e60-9028-2167bccdf108",
+      "fallbackUrl": "about:blank",
+      "audioEnabled": true,
+      "activationToken": "7U7BPOW9OUIIHJ7DXTH1EP4Z",
+      "status": "online",
+      "playerStatus": "playing",
+      "appVersion": "0.3.0-qr-tts",
+      "memoryMb": 7,
+      "reloads": 0,
+      "reconnects": 51,
+      "uptimeSeconds": 2612,
+      "lastError": "Unexpected end of JSON input",
+      "lastHeartbeat": "2026-04-21T18:24:00.338Z",
+      "createdAt": "2026-04-21T17:46:41.872Z",
+      "updatedAt": "2026-04-21T18:24:00.338Z",
+      "ipAddress": "192.168.68.123",
+      "lastIpAddress": "192.168.68.123",
+      "notifiedOffline": false,
+      "recoveryCycles": 0,
+      "webViewRecreates": 0,
+      "appRestarts": 0,
+      "lastSuccessfulPageLoadSecondsAgo": -1,
+      "lastWebViewRecreateSecondsAgo": -1
+    }
+  ],
+  "pairingSessions": [
+    {
+      "id": "pair_12e4860fa2e9f418",
+      "secret": "FG049NKNFQANPZ9-CQH4WQYY",
+      "code": "F41B4A",
+      "status": "approved",
+      "suggestedName": "TV aguardando aprovacao",
+      "appVersion": "0.3.0-qr-tts",
+      "deviceInfo": {
+        "model": "SM-A057M",
+        "manufacturer": "samsung"
+      },
+      "activationToken": "7U7BPOW9OUIIHJ7DXTH1EP4Z",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "createdAt": "2026-04-21T17:45:45.544Z",
+      "expiresAt": "2026-04-21T18:00:45.544Z",
+      "approvedAt": "2026-04-21T17:46:41.872Z"
+    },
+    {
+      "id": "pair_3f81abd6e25ece00",
+      "secret": "GEW1_F-AJMPIUP1T3FJSG-VI",
+      "code": "6C61D5",
+      "status": "pending",
+      "suggestedName": "TV aguardando aprovacao",
+      "appVersion": "0.3.0-qr-tts",
+      "deviceInfo": {
+        "model": "SM-A057M",
+        "manufacturer": "samsung"
+      },
+      "activationToken": null,
+      "deviceId": null,
+      "createdAt": "2026-04-21T17:32:33.489Z",
+      "expiresAt": "2026-04-21T17:47:33.489Z"
+    }
+  ],
+  "events": [
+    {
+      "id": "evt_d49ee281458c3b82",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:23:37.146Z"
+    },
+    {
+      "id": "evt_d2850ae0f050fc2d",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:23:34.118Z"
+    },
+    {
+      "id": "evt_a016c1eef634d3e0",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:22:54.089Z"
+    },
+    {
+      "id": "evt_b7d8361aafab0468",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:22:51.069Z"
+    },
+    {
+      "id": "evt_bd646108ca08d1d7",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:22:11.039Z"
+    },
+    {
+      "id": "evt_644420e7d82019e9",
+      "deviceId": "tv_8cd168847e14a6d7",
+      "type": "device.created",
+      "message": "TV cadastrada: Nova TV",
+      "meta": {},
+      "createdAt": "2026-04-21T18:21:41.781Z"
+    },
+    {
+      "id": "evt_bbf8ca41090f8fe1",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:21:38.441Z"
+    },
+    {
+      "id": "evt_e35353ef311076e7",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:21:35.421Z"
+    },
+    {
+      "id": "evt_99b701f2b96b33b8",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:20:55.391Z"
+    },
+    {
+      "id": "evt_72df68ecbf121ad4",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:20:52.366Z"
+    },
+    {
+      "id": "evt_b6d5401a1f92e814",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:20:12.354Z"
+    },
+    {
+      "id": "evt_e0f806a7a0d6c59d",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:20:05.105Z"
+    },
+    {
+      "id": "evt_0fcc079903843b7e",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:20:02.082Z"
+    },
+    {
+      "id": "evt_9711396ce7a86b2d",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:19:22.043Z"
+    },
+    {
+      "id": "evt_9e8302fb294061cf",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:19:19.024Z"
+    },
+    {
+      "id": "evt_aad08173c198d222",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:18:38.994Z"
+    },
+    {
+      "id": "evt_03dc110639f949e5",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:18:35.970Z"
+    },
+    {
+      "id": "evt_86f634c386dd099e",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:17:55.941Z"
+    },
+    {
+      "id": "evt_05216831af941870",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:17:52.918Z"
+    },
+    {
+      "id": "evt_cec57fe00c4c0a44",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:17:12.885Z"
+    },
+    {
+      "id": "evt_7d7301d818f66ff4",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:17:09.870Z"
+    },
+    {
+      "id": "evt_1e28492a7117d5df",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:16:29.839Z"
+    },
+    {
+      "id": "evt_802df1a4d820671e",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:16:26.816Z"
+    },
+    {
+      "id": "evt_49041a7f02dc4574",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:15:46.785Z"
+    },
+    {
+      "id": "evt_6703ff7e94d24633",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:15:43.762Z"
+    },
+    {
+      "id": "evt_8e3410f8d86fbdeb",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:15:03.726Z"
+    },
+    {
+      "id": "evt_993bd3d4dd94922f",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:14:23.885Z"
+    },
+    {
+      "id": "evt_4769d96870247d27",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:14:20.857Z"
+    },
+    {
+      "id": "evt_956a81925b42c5ad",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:13:40.827Z"
+    },
+    {
+      "id": "evt_b40381343fabb852",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:13:37.785Z"
+    },
+    {
+      "id": "evt_d0a79ffcd8ba0eda",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:12:57.758Z"
+    },
+    {
+      "id": "evt_23579476f2c8fdb8",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:12:54.725Z"
+    },
+    {
+      "id": "evt_ad2526f85356ee23",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:12:14.695Z"
+    },
+    {
+      "id": "evt_7479883743b17d52",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:12:11.673Z"
+    },
+    {
+      "id": "evt_98b633373b1db3cb",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:11:31.641Z"
+    },
+    {
+      "id": "evt_d211fd3888ba71a9",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:11:28.621Z"
+    },
+    {
+      "id": "evt_138f356fc86f2919",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:10:48.589Z"
+    },
+    {
+      "id": "evt_c1d8e0d65389b223",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:10:45.554Z"
+    },
+    {
+      "id": "evt_48fdb52c4b2e5f33",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:10:05.522Z"
+    },
+    {
+      "id": "evt_51d1c1e05b239458",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:10:02.488Z"
+    },
+    {
+      "id": "evt_aeb2212e419567f3",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:09:22.463Z"
+    },
+    {
+      "id": "evt_feb7ba75183de86c",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:09:19.444Z"
+    },
+    {
+      "id": "evt_cfd2b543e110a36b",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:08:39.413Z"
+    },
+    {
+      "id": "evt_1b0b5ef203620de1",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:07:58.714Z"
+    },
+    {
+      "id": "evt_feaa9920afc2dfa0",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:07:55.700Z"
+    },
+    {
+      "id": "evt_ecfb1aa2a177af8a",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:07:15.666Z"
+    },
+    {
+      "id": "evt_7718c3b5f6573d22",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:07:12.624Z"
+    },
+    {
+      "id": "evt_552d8520d047b73a",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:06:32.592Z"
+    },
+    {
+      "id": "evt_671242e81e990c33",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:06:29.576Z"
+    },
+    {
+      "id": "evt_501ec37b81a4d7d2",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:05:49.543Z"
+    },
+    {
+      "id": "evt_4bc28254fcc7993f",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:05:45.250Z"
+    },
+    {
+      "id": "evt_0f909f640fb60051",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:05:42.226Z"
+    },
+    {
+      "id": "evt_42a6f8bb6b63b0ff",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:05:02.194Z"
+    },
+    {
+      "id": "evt_c78268d8b36b3c68",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:04:59.178Z"
+    },
+    {
+      "id": "evt_b303925a72efab25",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:04:19.139Z"
+    },
+    {
+      "id": "evt_1dcbb7ab6c2112d6",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:01:57.696Z"
+    },
+    {
+      "id": "evt_fe5441dfb04dbc6c",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:01:25.441Z"
+    },
+    {
+      "id": "evt_c7f49bd9dc0ca2b0",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:01:22.429Z"
+    },
+    {
+      "id": "evt_c4d27a980abf8c6a",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:00:42.399Z"
+    },
+    {
+      "id": "evt_9107c06a99ab436a",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T18:00:39.288Z"
+    },
+    {
+      "id": "evt_fbdd78bf0c985f58",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:59:59.261Z"
+    },
+    {
+      "id": "evt_50e6c3df0d945828",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:59:56.206Z"
+    },
+    {
+      "id": "evt_81a26aeb741a6d4d",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:59:16.196Z"
+    },
+    {
+      "id": "evt_a3dd28aada2d2662",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:59:13.185Z"
+    },
+    {
+      "id": "evt_4f5a08cee9dfb649",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:58:33.157Z"
+    },
+    {
+      "id": "evt_4f47a7b9a00f2ff4",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:58:30.125Z"
+    },
+    {
+      "id": "evt_8aca74e5351d88de",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:57:50.117Z"
+    },
+    {
+      "id": "evt_4c4a02da000797b9",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:57:47.125Z"
+    },
+    {
+      "id": "evt_534d702d8e37b83d",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:57:07.094Z"
+    },
+    {
+      "id": "evt_fb5d0294af2eca4d",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:57:04.052Z"
+    },
+    {
+      "id": "evt_bba00cce93a56d0a",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:56:24.044Z"
+    },
+    {
+      "id": "evt_0a4b38da3d865779",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:56:21.018Z"
+    },
+    {
+      "id": "evt_26ff229297e27e63",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:55:40.982Z"
+    },
+    {
+      "id": "evt_c597096c042b282b",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:53:35.207Z"
+    },
+    {
+      "id": "evt_676166e7d2977277",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:53:21.966Z"
+    },
+    {
+      "id": "evt_1ebdda6084a97056",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:53:18.205Z"
+    },
+    {
+      "id": "evt_b3c6551529ee2f33",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:53:15.176Z"
+    },
+    {
+      "id": "evt_f4af68b44d2b26ef",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:52:35.146Z"
+    },
+    {
+      "id": "evt_20bf479ab23a2732",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:52:32.121Z"
+    },
+    {
+      "id": "evt_f134d44054c9ef70",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:51:52.090Z"
+    },
+    {
+      "id": "evt_2483045dad4deab3",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:51:49.069Z"
+    },
+    {
+      "id": "evt_e2065ee6512b9026",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:51:09.038Z"
+    },
+    {
+      "id": "evt_95fb2d8e6f8ec6e9",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:51:05.993Z"
+    },
+    {
+      "id": "evt_5b34a93f1342313a",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:50:25.983Z"
+    },
+    {
+      "id": "evt_164ad584440f2583",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:50:22.985Z"
+    },
+    {
+      "id": "evt_0a7bbfd383a98a65",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:49:42.954Z"
+    },
+    {
+      "id": "evt_ff133ded2391227d",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:49:39.923Z"
+    },
+    {
+      "id": "evt_bc4bcbe54a931560",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:48:59.895Z"
+    },
+    {
+      "id": "evt_22a92f72ccb42027",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:48:56.848Z"
+    },
+    {
+      "id": "evt_6ac35ad6dbfc7b29",
+      "deviceId": "tv_1d70b1a2e1acf0b5",
+      "type": "device.deleted",
+      "message": "TV excluida: PAINEL HOSPITAL",
+      "meta": {
+        "deviceId": "tv_1d70b1a2e1acf0b5"
+      },
+      "createdAt": "2026-04-21T17:48:48.330Z"
+    },
+    {
+      "id": "evt_2592fa5a6d9e362a",
+      "deviceId": "tv_08885684b38dc38b",
+      "type": "device.deleted",
+      "message": "TV excluida: PAINEL HOSPITAL",
+      "meta": {
+        "deviceId": "tv_08885684b38dc38b"
+      },
+      "createdAt": "2026-04-21T17:48:46.733Z"
+    },
+    {
+      "id": "evt_0b73cfdc08e59c63",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:48:16.837Z"
+    },
+    {
+      "id": "evt_357ce4aebe391657",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:48:13.813Z"
+    },
+    {
+      "id": "evt_b6376b70aca0dd2d",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:47:33.778Z"
+    },
+    {
+      "id": "evt_40c5f5485bc00d35",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:47:30.751Z"
+    },
+    {
+      "id": "evt_45a3982c32b8886d",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.updated",
+      "message": "Configuracao atualizada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:47:23.540Z"
+    },
+    {
+      "id": "evt_67ba4ed261fc79b2",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "device.connected",
+      "message": "TV conectada: TV aguardando aprovacao",
+      "meta": {},
+      "createdAt": "2026-04-21T17:46:50.723Z"
+    },
+    {
+      "id": "evt_ea0405cda0fe4d7e",
+      "deviceId": "tv_a22b67f21ee5132d",
+      "type": "pairing.approved",
+      "message": "Pareamento aprovado: TV aguardando aprovacao",
+      "meta": {
+        "code": "F41B4A"
+      },
+      "createdAt": "2026-04-21T17:46:41.872Z"
+    },
+    {
+      "id": "evt_2090784e45d27af7",
+      "deviceId": "tv_1d70b1a2e1acf0b5",
+      "type": "device.created",
+      "message": "TV cadastrada: PAINEL HOSPITAL",
+      "meta": {},
+      "createdAt": "2026-04-21T17:46:33.983Z"
+    },
+    {
+      "id": "evt_46cec06559d5e0ef",
+      "deviceId": null,
+      "type": "pairing.requested",
+      "message": "Novo pareamento solicitado: F41B4A",
+      "meta": {},
+      "createdAt": "2026-04-21T17:45:45.544Z"
+    },
+    {
+      "id": "evt_8c2e4305b22c6d6b",
+      "deviceId": "tv_08885684b38dc38b",
+      "type": "device.created",
+      "message": "TV cadastrada: PAINEL HOSPITAL",
+      "meta": {},
+      "createdAt": "2026-04-21T17:45:23.880Z"
+    },
+    {
+      "id": "evt_7dfbdd7c830f943a",
+      "deviceId": "tv_91dbc3076f67bb32",
+      "type": "device.deleted",
+      "message": "TV excluida: TV EMERSON TESTE",
+      "meta": {
+        "deviceId": "tv_91dbc3076f67bb32"
+      },
+      "createdAt": "2026-04-21T17:44:32.375Z"
+    },
+    {
+      "id": "evt_75f2af4f2ee8997f",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.deleted",
+      "message": "TV excluida: TV EMERSON TESTE",
+      "meta": {
+        "deviceId": "tv_a9ceb9798f443a7c"
+      },
+      "createdAt": "2026-04-21T17:44:30.082Z"
+    },
+    {
+      "id": "evt_de67125843364594",
+      "deviceId": "tv_b8c5e04f41b88197",
+      "type": "device.deleted",
+      "message": "TV excluida: Nova TV",
+      "meta": {
+        "deviceId": "tv_b8c5e04f41b88197"
+      },
+      "createdAt": "2026-04-21T17:44:28.610Z"
+    },
+    {
+      "id": "evt_7436ef183aea282f",
+      "deviceId": "tv_e526e8854774b1a1",
+      "type": "device.deleted",
+      "message": "TV excluida: TESTE EXCLUIR AUTOMATICO 2",
+      "meta": {
+        "deviceId": "tv_e526e8854774b1a1"
+      },
+      "createdAt": "2026-04-21T17:44:17.228Z"
+    },
+    {
+      "id": "evt_85d133fa2bb0186a",
+      "deviceId": "tv_e526e8854774b1a1",
+      "type": "device.created",
+      "message": "TV cadastrada: TESTE EXCLUIR AUTOMATICO 2",
+      "meta": {},
+      "createdAt": "2026-04-21T17:44:17.210Z"
+    },
+    {
+      "id": "evt_c9d09c9e3a696e97",
+      "deviceId": "tv_60e7f5364f8bc891",
+      "type": "device.deleted",
+      "message": "TV excluida: TESTE EXCLUIR AUTOMATICO",
+      "meta": {
+        "deviceId": "tv_60e7f5364f8bc891"
+      },
+      "createdAt": "2026-04-21T17:44:08.342Z"
+    },
+    {
+      "id": "evt_2febc9668a90d11e",
+      "deviceId": "tv_60e7f5364f8bc891",
+      "type": "device.created",
+      "message": "TV cadastrada: TESTE EXCLUIR AUTOMATICO",
+      "meta": {},
+      "createdAt": "2026-04-21T17:43:47.705Z"
+    },
+    {
+      "id": "evt_3067260459609be2",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.sent",
+      "message": "Comando enviado: reload_page",
+      "meta": {
+        "id": "cmd_038fc97b61dbe391",
+        "deviceId": "tv_a9ceb9798f443a7c",
+        "command": "reload_page",
+        "payload": {},
+        "createdAt": "2026-04-21T17:33:48.265Z"
+      },
+      "createdAt": "2026-04-21T17:33:48.265Z"
+    },
+    {
+      "id": "evt_41815929ea06d7dc",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.sent",
+      "message": "Comando enviado: recreate_webview",
+      "meta": {
+        "id": "cmd_6ade65d2e64985c2",
+        "deviceId": "tv_a9ceb9798f443a7c",
+        "command": "recreate_webview",
+        "payload": {},
+        "createdAt": "2026-04-21T17:33:47.409Z"
+      },
+      "createdAt": "2026-04-21T17:33:47.409Z"
+    },
+    {
+      "id": "evt_11439a4614a2bb60",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:33:39.230Z"
+    },
+    {
+      "id": "evt_fd5716b4f80c26a1",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.updated",
+      "message": "Configuracao atualizada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:33:39.183Z"
+    },
+    {
+      "id": "evt_5d7c872593a00555",
+      "deviceId": null,
+      "type": "pairing.requested",
+      "message": "Novo pareamento solicitado: 6C61D5",
+      "meta": {},
+      "createdAt": "2026-04-21T17:32:33.489Z"
+    },
+    {
+      "id": "evt_be31145f7846911c",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "alert.offline",
+      "message": "TV offline: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:26:13.342Z"
+    },
+    {
+      "id": "evt_e6d1d8963532d5d7",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:24:50.629Z"
+    },
+    {
+      "id": "evt_3450406adeb3d722",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:24:47.616Z"
+    },
+    {
+      "id": "evt_c3796fa1160850ca",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.ack",
+      "message": "Comando confirmado: cmd_bf71bd4549bd840f",
+      "meta": {
+        "type": "command_ack",
+        "commandId": "cmd_bf71bd4549bd840f",
+        "status": "ok",
+        "handledAt": 1776792264550
+      },
+      "createdAt": "2026-04-21T17:24:25.360Z"
+    },
+    {
+      "id": "evt_8fe356136584eb48",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.sent",
+      "message": "Comando enviado: clear_cache",
+      "meta": {
+        "id": "cmd_bf71bd4549bd840f",
+        "deviceId": "tv_a9ceb9798f443a7c",
+        "command": "clear_cache",
+        "payload": {},
+        "createdAt": "2026-04-21T17:24:25.219Z"
+      },
+      "createdAt": "2026-04-21T17:24:25.219Z"
+    },
+    {
+      "id": "evt_daa84246a2974afc",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.ack",
+      "message": "Comando confirmado: cmd_3586645bfea50d41",
+      "meta": {
+        "type": "command_ack",
+        "commandId": "cmd_3586645bfea50d41",
+        "status": "ok",
+        "handledAt": 1776792258741
+      },
+      "createdAt": "2026-04-21T17:24:19.550Z"
+    },
+    {
+      "id": "evt_739a0c6844b84e05",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.sent",
+      "message": "Comando enviado: recreate_webview",
+      "meta": {
+        "id": "cmd_3586645bfea50d41",
+        "deviceId": "tv_a9ceb9798f443a7c",
+        "command": "recreate_webview",
+        "payload": {},
+        "createdAt": "2026-04-21T17:24:19.455Z"
+      },
+      "createdAt": "2026-04-21T17:24:19.455Z"
+    },
+    {
+      "id": "evt_5946e491337c03f0",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.ack",
+      "message": "Comando confirmado: cmd_ce4b1dd45c6756c2",
+      "meta": {
+        "type": "command_ack",
+        "commandId": "cmd_ce4b1dd45c6756c2",
+        "status": "ok",
+        "handledAt": 1776792255843
+      },
+      "createdAt": "2026-04-21T17:24:16.653Z"
+    },
+    {
+      "id": "evt_7b1c2d627bc4c985",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.sent",
+      "message": "Comando enviado: reload_page",
+      "meta": {
+        "id": "cmd_ce4b1dd45c6756c2",
+        "deviceId": "tv_a9ceb9798f443a7c",
+        "command": "reload_page",
+        "payload": {},
+        "createdAt": "2026-04-21T17:24:16.524Z"
+      },
+      "createdAt": "2026-04-21T17:24:16.524Z"
+    },
+    {
+      "id": "evt_a06a330325187786",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:24:07.582Z"
+    },
+    {
+      "id": "evt_714cabd814d1f321",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:24:04.555Z"
+    },
+    {
+      "id": "evt_3bbfdbf40caf468a",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:23:24.522Z"
+    },
+    {
+      "id": "evt_4f246451e9ea76b3",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:23:21.494Z"
+    },
+    {
+      "id": "evt_30d9a708143e17e8",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:22:41.462Z"
+    },
+    {
+      "id": "evt_52edefb7b8551392",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:22:38.436Z"
+    },
+    {
+      "id": "evt_98c1fc673824954d",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.ack",
+      "message": "Comando confirmado: cmd_43e21579f17340fd",
+      "meta": {
+        "type": "command_ack",
+        "commandId": "cmd_43e21579f17340fd",
+        "status": "ok",
+        "handledAt": 1776792122619
+      },
+      "createdAt": "2026-04-21T17:22:03.431Z"
+    },
+    {
+      "id": "evt_97c563d4ebc5d6bc",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.sent",
+      "message": "Comando enviado: reload_page",
+      "meta": {
+        "id": "cmd_43e21579f17340fd",
+        "deviceId": "tv_a9ceb9798f443a7c",
+        "command": "reload_page",
+        "payload": {},
+        "createdAt": "2026-04-21T17:22:03.299Z"
+      },
+      "createdAt": "2026-04-21T17:22:03.299Z"
+    },
+    {
+      "id": "evt_b991dfa8b63749e1",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:21:58.407Z"
+    },
+    {
+      "id": "evt_502c9f0b41ff3cb2",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:21:55.369Z"
+    },
+    {
+      "id": "evt_47221f055e268c67",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.updated",
+      "message": "Configuracao atualizada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:21:39.571Z"
+    },
+    {
+      "id": "evt_622447062e9cda62",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:21:15.336Z"
+    },
+    {
+      "id": "evt_1e2ef8a4ae9db8a8",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:21:12.321Z"
+    },
+    {
+      "id": "evt_d4f17dff9afa02ca",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.updated",
+      "message": "Configuracao atualizada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:21:06.518Z"
+    },
+    {
+      "id": "evt_41246625d8462d13",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:20:32.290Z"
+    },
+    {
+      "id": "evt_b8a64938712d6715",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:20:29.260Z"
+    },
+    {
+      "id": "evt_4febde76b4a172b1",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:19:49.226Z"
+    },
+    {
+      "id": "evt_919a8c952f81a749",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:19:46.202Z"
+    },
+    {
+      "id": "evt_e900dbf62ea842ab",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:19:06.169Z"
+    },
+    {
+      "id": "evt_4645ab5a7fdacb30",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:19:03.113Z"
+    },
+    {
+      "id": "evt_12297754fe889362",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:18:23.097Z"
+    },
+    {
+      "id": "evt_70a677634b52cf6a",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:18:20.067Z"
+    },
+    {
+      "id": "evt_058e61d559c9b69b",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:17:40.032Z"
+    },
+    {
+      "id": "evt_8e188edd51fc0d85",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:17:36.586Z"
+    },
+    {
+      "id": "evt_425064c5962ac09c",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:17:33.547Z"
+    },
+    {
+      "id": "evt_659d2cf8884fa1b0",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:16:53.513Z"
+    },
+    {
+      "id": "evt_db9571441d298beb",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:16:50.488Z"
+    },
+    {
+      "id": "evt_49054c875272e28a",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:16:10.453Z"
+    },
+    {
+      "id": "evt_a690af4b545b013b",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:16:07.424Z"
+    },
+    {
+      "id": "evt_637bd56b22ecaa76",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:15:27.392Z"
+    },
+    {
+      "id": "evt_72ed1ab9b3da96a8",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:15:24.361Z"
+    },
+    {
+      "id": "evt_93036ed84d6c9494",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:14:44.331Z"
+    },
+    {
+      "id": "evt_1f7fe5e99ebf1097",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:14:41.286Z"
+    },
+    {
+      "id": "evt_3381db15c6b49fee",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:14:01.270Z"
+    },
+    {
+      "id": "evt_8cfe8e33df71ac20",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:13:58.266Z"
+    },
+    {
+      "id": "evt_b7e2420bd2f55ecb",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:13:18.217Z"
+    },
+    {
+      "id": "evt_b238e73925b1cef2",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:13:15.182Z"
+    },
+    {
+      "id": "evt_bcf7960bbae6fb34",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:12:35.145Z"
+    },
+    {
+      "id": "evt_36674fefb3b0285b",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:12:32.126Z"
+    },
+    {
+      "id": "evt_c7d73cff9bdd22c9",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:11:52.095Z"
+    },
+    {
+      "id": "evt_ade3f195ac01370f",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:11:49.059Z"
+    },
+    {
+      "id": "evt_fc793eeab71fbcee",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:11:09.025Z"
+    },
+    {
+      "id": "evt_4ba9b0de0c3251cb",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:11:06.020Z"
+    },
+    {
+      "id": "evt_b419f7146ca16b12",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:10:25.985Z"
+    },
+    {
+      "id": "evt_71111265dde4623b",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:10:22.951Z"
+    },
+    {
+      "id": "evt_4daa0639156fd3ff",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:09:42.921Z"
+    },
+    {
+      "id": "evt_9eb9aa2119e5c1b7",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:09:39.900Z"
+    },
+    {
+      "id": "evt_7afd157369dd3da3",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:08:59.866Z"
+    },
+    {
+      "id": "evt_292f548972c4b0fe",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:08:56.841Z"
+    },
+    {
+      "id": "evt_a2bb2fe716824f14",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:08:16.804Z"
+    },
+    {
+      "id": "evt_206cfb27476d5988",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:08:13.757Z"
+    },
+    {
+      "id": "evt_7d68a15f6cf8abef",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:07:33.744Z"
+    },
+    {
+      "id": "evt_7a788d4ed2af02ac",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:07:30.726Z"
+    },
+    {
+      "id": "evt_d8eb0f4e08434742",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.ack",
+      "message": "Comando confirmado: cmd_173c87feb1566543",
+      "meta": {
+        "type": "command_ack",
+        "commandId": "cmd_173c87feb1566543",
+        "status": "ok",
+        "handledAt": 1776791240253
+      },
+      "createdAt": "2026-04-21T17:07:21.076Z"
+    },
+    {
+      "id": "evt_e814e9ba50cc9e25",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.sent",
+      "message": "Comando enviado: recreate_webview",
+      "meta": {
+        "id": "cmd_173c87feb1566543",
+        "deviceId": "tv_a9ceb9798f443a7c",
+        "command": "recreate_webview",
+        "payload": {},
+        "createdAt": "2026-04-21T17:07:20.949Z"
+      },
+      "createdAt": "2026-04-21T17:07:20.949Z"
+    },
+    {
+      "id": "evt_09fd71d19863166b",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.ack",
+      "message": "Comando confirmado: cmd_4ce3e9e2eec4508c",
+      "meta": {
+        "type": "command_ack",
+        "commandId": "cmd_4ce3e9e2eec4508c",
+        "status": "ok",
+        "handledAt": 1776791236754
+      },
+      "createdAt": "2026-04-21T17:07:17.577Z"
+    },
+    {
+      "id": "evt_3609776e02280c9f",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.sent",
+      "message": "Comando enviado: set_audio",
+      "meta": {
+        "id": "cmd_4ce3e9e2eec4508c",
+        "deviceId": "tv_a9ceb9798f443a7c",
+        "command": "set_audio",
+        "payload": {
+          "audioEnabled": true
+        },
+        "createdAt": "2026-04-21T17:07:17.536Z"
+      },
+      "createdAt": "2026-04-21T17:07:17.536Z"
+    },
+    {
+      "id": "evt_520a57bd5f7a5dd9",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.updated",
+      "message": "Configuracao atualizada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:07:17.523Z"
+    },
+    {
+      "id": "evt_03e8f6af3885d6bd",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.ack",
+      "message": "Comando confirmado: cmd_901b2bf43b08ea4a",
+      "meta": {
+        "type": "command_ack",
+        "commandId": "cmd_901b2bf43b08ea4a",
+        "status": "ok",
+        "handledAt": 1776791232448
+      },
+      "createdAt": "2026-04-21T17:07:13.273Z"
+    },
+    {
+      "id": "evt_bce65d2388ec20db",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "command.sent",
+      "message": "Comando enviado: set_audio",
+      "meta": {
+        "id": "cmd_901b2bf43b08ea4a",
+        "deviceId": "tv_a9ceb9798f443a7c",
+        "command": "set_audio",
+        "payload": {
+          "audioEnabled": false
+        },
+        "createdAt": "2026-04-21T17:07:13.206Z"
+      },
+      "createdAt": "2026-04-21T17:07:13.206Z"
+    },
+    {
+      "id": "evt_02e3375a5a629d18",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.updated",
+      "message": "Configuracao atualizada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:07:13.192Z"
+    },
+    {
+      "id": "evt_341183ef5f3be380",
+      "deviceId": "tv_91dbc3076f67bb32",
+      "type": "device.created",
+      "message": "TV cadastrada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:07:04.716Z"
+    },
+    {
+      "id": "evt_98f07a5968d5fb46",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:06:50.698Z"
+    },
+    {
+      "id": "evt_c82685a227ff411e",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.disconnected",
+      "message": "TV desconectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:06:47.681Z"
+    },
+    {
+      "id": "evt_3f867afe980f2c16",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.connected",
+      "message": "TV conectada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:06:07.649Z"
+    },
+    {
+      "id": "evt_e7a761645dc18099",
+      "deviceId": "tv_a9ceb9798f443a7c",
+      "type": "device.created",
+      "message": "TV cadastrada: TV EMERSON TESTE",
+      "meta": {},
+      "createdAt": "2026-04-21T17:04:49.232Z"
+    },
+    {
+      "id": "evt_2f84e0bf3825a57e",
+      "deviceId": "tv_b8c5e04f41b88197",
+      "type": "device.created",
+      "message": "TV cadastrada: Nova TV",
+      "meta": {},
+      "createdAt": "2026-04-21T16:51:00.161Z"
+    }
+  ],
+  "settings": {
+    "heartbeatIntervalSeconds": 15,
+    "preventiveReloadHours": 12,
+    "memoryLimitMb": 650,
+    "pageOfflineTimeoutSeconds": 60,
+    "fallbackUrl": "about:blank",
+    "telegram": {
+      "enabled": false,
+      "botToken": "",
+      "chatId": ""
+    }
+  }
+}

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Teste de Voz</title>
+    <style>
+      body {
+        display: grid;
+        min-height: 100vh;
+        place-items: center;
+        margin: 0;
+        background: #061014;
+        color: white;
+        font-family: Arial, sans-serif;
+      }
+      main {
+        display: grid;
+        gap: 18px;
+        width: min(720px, calc(100vw - 40px));
+        text-align: center;
+      }
+      h1 {
+        margin: 0;
+        font-size: 42px;
+      }
+      p {
+        margin: 0;
+        color: #b7c9cf;
+        font-size: 20px;
+      }
+      button {
+        min-height: 54px;
+        border: 0;
+        border-radius: 8px;
+        background: #0f766e;
+        color: white;
+        font-size: 20px;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Teste de Narrador</h1>
+      <p>Se a ponte nativa estiver funcionando, a TV vai falar a frase de teste.</p>
+      <button onclick="speakTest()">Falar agora</button>
+      <p id="status">Aguardando...</p>
+    </main>
+    <script>
+      function speakTest() {
+        const text = "Teste de chamada. Paciente Maria Silva, comparecer a recepcao.";
+        document.getElementById("status").textContent =
+          window.speechSynthesis ? "Chamando narrador..." : "speechSynthesis nao encontrado.";
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "pt-BR";
+        utterance.rate = 1;
+        utterance.onend = () => {
+          document.getElementById("status").textContent = "Narracao finalizada.";
+        };
+        utterance.onerror = () => {
+          document.getElementById("status").textContent = "Erro ao narrar.";
+        };
+        window.speechSynthesis.speak(utterance);
+      }
+      setTimeout(speakTest, 2500);
+    </script>
+  </body>
+</html>

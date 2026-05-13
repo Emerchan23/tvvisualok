@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aprovar TV</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/pair.css" />
+  </head>
+  <body class="pair-page">
+    <main class="pair-shell">
+      <section class="pair-card">
+        <p class="eyebrow">Autenticador do gestor</p>
+        <h1>Aprovar TV</h1>
+        <p id="pairStatus" class="pair-status">Carregando pareamento...</p>
+
+        <label>Token admin
+          <input id="adminToken" type="password" value="admin123" autocomplete="off" />
+        </label>
+        <label>Nome da TV
+          <input id="tvName" placeholder="Ex: TV Caixa 01" />
+        </label>
+        <label>Local
+          <input id="tvLocation" placeholder="Ex: Loja Centro" />
+        </label>
+        <label>Grupo
+          <input id="tvGroup" placeholder="Ex: Recepcao" />
+        </label>
+        <label>URL inicial
+          <input id="tvUrl" placeholder="about:blank" value="about:blank" />
+        </label>
+        <label>URL fallback
+          <input id="tvFallback" placeholder="about:blank" value="about:blank" />
+        </label>
+        <label class="check">
+          <input id="tvAudio" type="checkbox" checked />
+          Audio ativo
+        </label>
+
+        <button id="approveBtn" class="primary">Aprovar e conectar TV</button>
+        <p id="result" class="result"></p>
+      </section>
+    </main>
+    <script src="/pair.js"></script>
+  </body>
+</html>

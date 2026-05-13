@@ -1,0 +1,42 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "br.com.paineltv.gestor"
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "br.com.paineltv.gestor"
+        minSdk 23
+        targetSdk 36
+        versionCode 5
+        versionName "0.2.3-edicao-link"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("../../android-release.keystore")
+            storePassword "PainelTV@2026"
+            keyAlias "painel-tv"
+            keyPassword "PainelTV@2026"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    implementation "com.squareup.okhttp3:okhttp:4.12.0"
+    implementation "com.google.zxing:core:3.5.3"
+}
