@@ -121,13 +121,13 @@ function displayModeLabel(value) {
 }
 
 function themeLabel(value) {
-  if (value === "sus_institucional") return "SUS Institucional";
-  if (value === "tech_light") return "Tech Light";
-  if (value === "hospital_blue") return "Hospital Blue";
-  if (value === "contrast_gold") return "Contrast Gold";
+  if (value === "sus_verde") return "SUS Verde";
+  if (value === "hospital_azul") return "Hospital Azul";
+  if (value === "clinica_moderna") return "Clinica Moderna";
+  if (value === "emergencia") return "Emergencia/UPA";
   if (value === "dark_modern") return "Escuro Moderno";
   if (value === "high_contrast") return "Alto Contraste";
-  return "Classic Warm";
+  return "SUS Verde";
 }
 
 function mediaSummary(device) {

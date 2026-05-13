@@ -121,13 +121,12 @@ let state = {
 };
 
 const DIRECT_VIDEO_EXTENSIONS = [".mp4", ".webm", ".ogg", ".mov", ".m4v"];
-const DEFAULT_THEME_ID = "classic_warm";
+const DEFAULT_THEME_ID = "sus_verde";
 const SUPPORTED_THEME_IDS = new Set([
-  "classic_warm",
-  "sus_institucional",
-  "tech_light",
-  "hospital_blue",
-  "contrast_gold",
+  "sus_verde",
+  "hospital_azul",
+  "clinica_moderna",
+  "emergencia",
   "dark_modern",
   "high_contrast"
 ]);
