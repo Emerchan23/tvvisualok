@@ -110,6 +110,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var nativeMediaTitleText: TextView
     private lateinit var nativeMediaHintText: TextView
     private lateinit var nativeList: LinearLayout
+    private lateinit var nativeClockText: TextView
+    private lateinit var nativeDateText: TextView
 
     private val prefs by lazy { getSharedPreferences("painel_tv_novo", Context.MODE_PRIVATE) }
 
@@ -456,6 +458,7 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         markActivityAlive(false)
+        stopClockUpdates()
         mainHandler.removeCallbacksAndMessages(null)
         disconnectWebSocket()
         try {
@@ -1050,133 +1053,118 @@ class MainActivity : AppCompatActivity() {
             FrameLayout.LayoutParams.MATCH_PARENT
         )
 
+        // HEADER MODERNO - Design limpo com relogio integrado
         val header = LinearLayout(this)
         nativeHeaderCard = header
-        header.orientation = LinearLayout.VERTICAL
-        header.setPadding(dp(28), dp(24), dp(28), dp(24))
+        header.orientation = LinearLayout.HORIZONTAL
+        header.gravity = Gravity.CENTER_VERTICAL
+        header.setPadding(dp(24), dp(16), dp(24), dp(16))
         header.background = createGradientCardDrawable(
-            startColor = 0xFFFFFEFC.toInt(),
-            endColor = 0xFFFBF6F0.toInt(),
-            strokeColor = 0xFFE7DDD1.toInt(),
-            strokeWidth = dp(1),
-            radiusDp = 34
+            startColor = 0xFF007A33.toInt(),
+            endColor = 0xFF006428.toInt(),
+            strokeColor = 0xFF005522.toInt(),
+            strokeWidth = 0,
+            radiusDp = 20
         )
-        header.elevation = dp(9).toFloat()
+        header.elevation = dp(8).toFloat()
         root.addView(header, LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         ))
 
-        val headerTop = LinearLayout(this)
-        headerTop.orientation = LinearLayout.HORIZONTAL
-        headerTop.gravity = Gravity.CENTER_VERTICAL
-        header.addView(headerTop, LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        ))
-
-        val brandWrap = LinearLayout(this)
-        brandWrap.orientation = LinearLayout.HORIZONTAL
-        brandWrap.gravity = Gravity.CENTER_VERTICAL
-        headerTop.addView(brandWrap, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
-
+        // Logo da unidade (lado esquerdo)
         nativeUnitLogoView = ImageView(this)
         nativeUnitLogoView.scaleType = ImageView.ScaleType.CENTER_CROP
         nativeUnitLogoView.background = createGradientCardDrawable(
-            startColor = 0xFFFFFEFC.toInt(),
-            endColor = 0xFFF6EFE8.toInt(),
-            strokeColor = 0xFFE8DDD1.toInt(),
-            strokeWidth = dp(1),
-            radiusDp = 24
+            startColor = 0xFFFFFFFF.toInt(),
+            endColor = 0xFFF5FBF8.toInt(),
+            strokeColor = 0x00000000,
+            strokeWidth = 0,
+            radiusDp = 14
         )
-        nativeUnitLogoView.setPadding(dp(10), dp(10), dp(10), dp(10))
+        nativeUnitLogoView.setPadding(dp(8), dp(8), dp(8), dp(8))
         nativeUnitLogoView.isVisible = false
-        brandWrap.addView(nativeUnitLogoView, LinearLayout.LayoutParams(dp(84), dp(84)).apply {
-            marginEnd = dp(20)
+        header.addView(nativeUnitLogoView, LinearLayout.LayoutParams(dp(72), dp(72)).apply {
+            marginEnd = dp(18)
         })
 
+        // Bloco central com nome da unidade
         val titleBlock = LinearLayout(this)
         titleBlock.orientation = LinearLayout.VERTICAL
-        brandWrap.addView(titleBlock, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
-
-        val eyebrow = TextView(this)
-        eyebrow.text = "PAINEL DE ATENDIMENTO DIGITAL"
-        eyebrow.setTextColor(0xFF2A2E31.toInt())
-        eyebrow.textSize = 11f
-        eyebrow.typeface = Typeface.DEFAULT_BOLD
-        eyebrow.letterSpacing = 0.08f
-        eyebrow.isVisible = false
-        titleBlock.addView(eyebrow)
+        titleBlock.gravity = Gravity.CENTER_VERTICAL
+        header.addView(titleBlock, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
 
         nativeUnitNameText = TextView(this)
-        nativeUnitNameText.text = "Painel de chamados"
-        nativeUnitNameText.setTextColor(0xFF1E1F20.toInt())
-        nativeUnitNameText.textSize = 30f
+        nativeUnitNameText.text = "PAINEL DE CHAMADOS"
+        nativeUnitNameText.setTextColor(0xFFFFFFFF.toInt())
+        nativeUnitNameText.textSize = 26f
         nativeUnitNameText.typeface = Typeface.DEFAULT_BOLD
-        nativeUnitNameText.maxLines = 2
-        nativeUnitNameText.setLineSpacing(0f, 0.98f)
+        nativeUnitNameText.letterSpacing = 0.02f
+        nativeUnitNameText.maxLines = 1
         titleBlock.addView(nativeUnitNameText)
 
         nativeUnitSubtitleText = TextView(this)
-        nativeUnitSubtitleText.text = "Fluxo de paciente inteligente focado na prioridade e clareza visual"
-        nativeUnitSubtitleText.setTextColor(0xFF5B5751.toInt())
+        nativeUnitSubtitleText.text = "Sistema Unico de Saude"
+        nativeUnitSubtitleText.setTextColor(0xCCFFFFFF.toInt())
         nativeUnitSubtitleText.textSize = 14f
-        nativeUnitSubtitleText.setLineSpacing(0f, 1.1f)
-        nativeUnitSubtitleText.isVisible = false
-        titleBlock.addView(nativeUnitSubtitleText)
+        nativeUnitSubtitleText.letterSpacing = 0.04f
+        nativeUnitSubtitleText.isVisible = true
+        titleBlock.addView(nativeUnitSubtitleText, LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            topMargin = dp(2)
+        })
 
+        // Texto de modo (oculto por padrao)
         nativeModeText = TextView(this)
-        nativeModeText.text = "Aguardando configuracao do painel"
-        nativeModeText.setTextColor(0xFF7A756E.toInt())
+        nativeModeText.text = ""
+        nativeModeText.setTextColor(0x00000000.toInt())
         nativeModeText.textSize = 0f
-        nativeModeText.setLineSpacing(0f, 1.1f)
-        nativeModeText.setPadding(0, dp(10), 0, 0)
         nativeModeText.isVisible = false
         titleBlock.addView(nativeModeText)
 
-        val statusWrap = LinearLayout(this)
-        statusWrap.orientation = LinearLayout.VERTICAL
-        statusWrap.gravity = Gravity.END
-        statusWrap.background = createGradientCardDrawable(
-            startColor = 0xFFFFFDFC.toInt(),
-            endColor = 0xFFF8F4EE.toInt(),
-            strokeColor = 0xFFE9E0D6.toInt(),
-            strokeWidth = dp(1),
-            radiusDp = 26
-        )
-        statusWrap.setPadding(dp(18), dp(16), dp(18), dp(16))
-        statusWrap.isVisible = false
-        headerTop.addView(statusWrap, LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        ).apply {
-            marginStart = dp(18)
-        })
-
-        val statusTitle = TextView(this)
-        statusTitle.text = "STATUS DO PAINEL"
-        statusTitle.setTextColor(0xFF8A8178.toInt())
-        statusTitle.textSize = 11f
-        statusTitle.typeface = Typeface.DEFAULT_BOLD
-        statusTitle.letterSpacing = 0.18f
-        statusTitle.gravity = Gravity.END
-        statusTitle.isVisible = false
-        statusWrap.addView(statusTitle)
-
+        // Status text (oculto, usado internamente)
         nativeStatusText = TextView(this)
-        nativeStatusText.text = "Aguardando dados"
-        nativeStatusText.setTextColor(0xFF1B587D.toInt())
-        nativeStatusText.textSize = 14f
-        nativeStatusText.typeface = Typeface.DEFAULT_BOLD
-        nativeStatusText.gravity = Gravity.CENTER
-        nativeStatusText.setPadding(dp(18), dp(12), dp(18), dp(12))
-        nativeStatusText.minWidth = dp(220)
-        statusWrap.addView(nativeStatusText, LinearLayout.LayoutParams(
+        nativeStatusText.text = ""
+        nativeStatusText.textSize = 0f
+        nativeStatusText.isVisible = false
+        titleBlock.addView(nativeStatusText)
+
+        // Bloco do relogio (lado direito)
+        val clockBlock = LinearLayout(this)
+        clockBlock.orientation = LinearLayout.VERTICAL
+        clockBlock.gravity = Gravity.CENTER or Gravity.END
+        clockBlock.setPadding(dp(20), dp(8), dp(0), dp(8))
+        header.addView(clockBlock, LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ))
+
+        nativeClockText = TextView(this)
+        nativeClockText.text = "00:00"
+        nativeClockText.setTextColor(0xFFFFFFFF.toInt())
+        nativeClockText.textSize = 42f
+        nativeClockText.typeface = Typeface.create("sans-serif-light", Typeface.NORMAL)
+        nativeClockText.gravity = Gravity.END
+        nativeClockText.letterSpacing = -0.02f
+        clockBlock.addView(nativeClockText)
+
+        nativeDateText = TextView(this)
+        nativeDateText.text = "Segunda-feira, 01 de Janeiro"
+        nativeDateText.setTextColor(0xCCFFFFFF.toInt())
+        nativeDateText.textSize = 14f
+        nativeDateText.gravity = Gravity.END
+        nativeDateText.letterSpacing = 0.02f
+        clockBlock.addView(nativeDateText, LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         ).apply {
-            topMargin = dp(12)
+            topMargin = dp(-4)
         })
+
+        // Iniciar atualizacao do relogio
+        startClockUpdates()
         setNativeStatus("Aguardando dados", 0xFF205A7A.toInt(), 0xFFE6F4FA.toInt())
 
         nativeBodyRow = LinearLayout(this)
@@ -1188,21 +1176,23 @@ class MainActivity : AppCompatActivity() {
             1f
         ))
 
+        // CARD DE CHAMADA ATUAL - Design moderno com destaque visual
         nativeCurrentCard = LinearLayout(this)
         nativeCurrentCard.orientation = LinearLayout.VERTICAL
-        nativeCurrentCard.setPadding(dp(34), dp(30), dp(34), dp(30))
+        nativeCurrentCard.setPadding(dp(28), dp(24), dp(28), dp(24))
         nativeCurrentCard.background = createGradientCardDrawable(
-            startColor = 0xFFFFFEFC.toInt(),
-            endColor = 0xFFFBF5EE.toInt(),
-            strokeColor = 0xFFD0B38D.toInt(),
-            strokeWidth = dp(1),
-            radiusDp = 36
+            startColor = 0xFFFFFFFF.toInt(),
+            endColor = 0xFFF8FCFA.toInt(),
+            strokeColor = 0xFF007A33.toInt(),
+            strokeWidth = dp(3),
+            radiusDp = 24
         )
-        nativeCurrentCard.elevation = dp(10).toFloat()
-        nativeBodyRow.addView(nativeCurrentCard, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.28f).apply {
-            marginEnd = dp(20)
+        nativeCurrentCard.elevation = dp(12).toFloat()
+        nativeBodyRow.addView(nativeCurrentCard, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.3f).apply {
+            marginEnd = dp(16)
         })
 
+        // Header do card com badge de prioridade centralizado
         val currentHeader = LinearLayout(this)
         currentHeader.orientation = LinearLayout.HORIZONTAL
         currentHeader.gravity = Gravity.CENTER_VERTICAL
@@ -1211,149 +1201,203 @@ class MainActivity : AppCompatActivity() {
             LinearLayout.LayoutParams.WRAP_CONTENT
         ))
 
+        // Badge "CHAMANDO" centralizado
         nativeCurrentLabelText = TextView(this)
-        nativeCurrentLabelText.text = "CHAMADA ATIVA"
-        nativeCurrentLabelText.setTextColor(0xFF7A4A08.toInt())
-        nativeCurrentLabelText.textSize = 13f
+        nativeCurrentLabelText.text = "CHAMANDO"
+        nativeCurrentLabelText.setTextColor(0xFFFFFFFF.toInt())
+        nativeCurrentLabelText.textSize = 16f
         nativeCurrentLabelText.typeface = Typeface.DEFAULT_BOLD
-        nativeCurrentLabelText.letterSpacing = 0.16f
-        nativeCurrentLabelText.setPadding(dp(18), dp(11), dp(18), dp(11))
-        nativeCurrentLabelText.background = createPillDrawable(0xFFFFE1B8.toInt(), 0xFFF2C784.toInt())
-        currentHeader.addView(nativeCurrentLabelText)
-
-        val currentHeaderHint = TextView(this)
-        nativeCurrentHintText = currentHeaderHint
-        currentHeaderHint.text = "Fluxo ativo em tempo real"
-        currentHeaderHint.setTextColor(0xFF6B6761.toInt())
-        currentHeaderHint.textSize = 14f
-        currentHeaderHint.gravity = Gravity.END
-        currentHeader.addView(currentHeaderHint, LinearLayout.LayoutParams(
-            0,
+        nativeCurrentLabelText.letterSpacing = 0.12f
+        nativeCurrentLabelText.setPadding(dp(24), dp(12), dp(24), dp(12))
+        nativeCurrentLabelText.background = createPillDrawable(0xFF007A33.toInt(), 0xFF005522.toInt())
+        currentHeader.addView(nativeCurrentLabelText, LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
-            1f
+            LinearLayout.LayoutParams.WRAP_CONTENT
         ))
 
+        // Hint text (oculto por padrao)
+        val currentHeaderHint = TextView(this)
+        nativeCurrentHintText = currentHeaderHint
+        currentHeaderHint.text = ""
+        currentHeaderHint.setTextColor(0xFF6B6761.toInt())
+        currentHeaderHint.textSize = 0f
+        currentHeaderHint.isVisible = false
+        currentHeader.addView(currentHeaderHint, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
+
+        // Badge de prioridade no topo direito
+        nativePriorityText = TextView(this)
+        nativePriorityText.text = ""
+        nativePriorityText.setTextColor(0xFFFFFFFF.toInt())
+        nativePriorityText.textSize = 14f
+        nativePriorityText.typeface = Typeface.DEFAULT_BOLD
+        nativePriorityText.gravity = Gravity.CENTER
+        nativePriorityText.letterSpacing = 0.08f
+        nativePriorityText.setPadding(dp(16), dp(10), dp(16), dp(10))
+        currentHeader.addView(nativePriorityText, LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ))
+
+        // Nome do paciente - GRANDE e centralizado
         nativePatientText = TextView(this)
         nativePatientText.text = "--"
-        nativePatientText.setTextColor(0xFF1E1F20.toInt())
-        nativePatientText.textSize = 56f
-        nativePatientText.typeface = Typeface.create(Typeface.SERIF, Typeface.BOLD)
-        nativePatientText.gravity = Gravity.CENTER_VERTICAL
-        nativePatientText.maxLines = 3
-        nativePatientText.setLineSpacing(0f, 0.95f)
+        nativePatientText.setTextColor(0xFF1A1A1A.toInt())
+        nativePatientText.textSize = 64f
+        nativePatientText.typeface = Typeface.DEFAULT_BOLD
+        nativePatientText.gravity = Gravity.CENTER
+        nativePatientText.maxLines = 2
+        nativePatientText.setLineSpacing(0f, 0.92f)
         nativeCurrentCard.addView(nativePatientText, LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             0,
             1f
         ).apply {
-            topMargin = dp(26)
-            bottomMargin = dp(10)
+            topMargin = dp(20)
+            bottomMargin = dp(16)
         })
 
-        val summaryBand = LinearLayout(this)
-        summaryBand.orientation = LinearLayout.VERTICAL
-        summaryBand.setPadding(dp(22), dp(20), dp(22), dp(20))
-        summaryBand.background = createGradientCardDrawable(
-            startColor = 0xFFFFFEFC.toInt(),
-            endColor = 0xFFF8F4EE.toInt(),
-            strokeColor = 0xFFE5DCD2.toInt(),
+        // Barra de informacoes - Sala e Profissional lado a lado
+        val infoBar = LinearLayout(this)
+        infoBar.orientation = LinearLayout.HORIZONTAL
+        infoBar.gravity = Gravity.CENTER
+        infoBar.setPadding(dp(20), dp(18), dp(20), dp(18))
+        infoBar.background = createGradientCardDrawable(
+            startColor = 0xFFF5FBF8.toInt(),
+            endColor = 0xFFEDF7F2.toInt(),
+            strokeColor = 0xFFD0E8DC.toInt(),
             strokeWidth = dp(1),
-            radiusDp = 28
+            radiusDp = 16
         )
-        nativeCurrentCard.addView(summaryBand, LinearLayout.LayoutParams(
+        nativeCurrentCard.addView(infoBar, LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         ))
 
+        // Bloco da Sala
+        val roomBlock = LinearLayout(this)
+        roomBlock.orientation = LinearLayout.VERTICAL
+        roomBlock.gravity = Gravity.CENTER
+        infoBar.addView(roomBlock, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
+
+        val roomLabel = TextView(this)
+        roomLabel.text = "SALA"
+        roomLabel.setTextColor(0xFF5A8A6A.toInt())
+        roomLabel.textSize = 12f
+        roomLabel.typeface = Typeface.DEFAULT_BOLD
+        roomLabel.letterSpacing = 0.1f
+        roomLabel.gravity = Gravity.CENTER
+        roomBlock.addView(roomLabel)
+
         nativeRoomText = TextView(this)
-        nativeRoomText.text = "Sala: --"
-        nativeRoomText.setTextColor(0xFF222222.toInt())
-        nativeRoomText.textSize = 30f
-        nativeRoomText.gravity = Gravity.START
+        nativeRoomText.text = "--"
+        nativeRoomText.setTextColor(0xFF1A5A3A.toInt())
+        nativeRoomText.textSize = 32f
+        nativeRoomText.gravity = Gravity.CENTER
         nativeRoomText.typeface = Typeface.DEFAULT_BOLD
-        summaryBand.addView(nativeRoomText)
-
-        nativeProfessionalText = TextView(this)
-        nativeProfessionalText.text = "Profissional: --"
-        nativeProfessionalText.setTextColor(0xFF3B3A39.toInt())
-        nativeProfessionalText.textSize = 19f
-        nativeProfessionalText.gravity = Gravity.START
-        nativeProfessionalText.setLineSpacing(0f, 1.08f)
-        summaryBand.addView(nativeProfessionalText, LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        ).apply {
-            topMargin = dp(10)
-        })
-
-        nativePriorityText = TextView(this)
-        nativePriorityText.text = ""
-        nativePriorityText.setTextColor(0xFF4F5F70.toInt())
-        nativePriorityText.textSize = 18f
-        nativePriorityText.typeface = Typeface.DEFAULT_BOLD
-        nativePriorityText.gravity = Gravity.CENTER
-        nativePriorityText.setPadding(dp(18), dp(12), dp(18), dp(12))
-        nativeCurrentCard.addView(nativePriorityText, LinearLayout.LayoutParams(
+        roomBlock.addView(nativeRoomText, LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         ).apply {
-            gravity = Gravity.START
-            topMargin = dp(18)
+            topMargin = dp(4)
         })
 
+        // Divisor vertical
+        val divider = View(this)
+        divider.setBackgroundColor(0xFFD0E8DC.toInt())
+        infoBar.addView(divider, LinearLayout.LayoutParams(dp(1), dp(50)).apply {
+            marginStart = dp(16)
+            marginEnd = dp(16)
+        })
+
+        // Bloco do Profissional
+        val profBlock = LinearLayout(this)
+        profBlock.orientation = LinearLayout.VERTICAL
+        profBlock.gravity = Gravity.CENTER
+        infoBar.addView(profBlock, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.5f))
+
+        val profLabel = TextView(this)
+        profLabel.text = "PROFISSIONAL"
+        profLabel.setTextColor(0xFF5A8A6A.toInt())
+        profLabel.textSize = 12f
+        profLabel.typeface = Typeface.DEFAULT_BOLD
+        profLabel.letterSpacing = 0.1f
+        profLabel.gravity = Gravity.CENTER
+        profBlock.addView(profLabel)
+
+        nativeProfessionalText = TextView(this)
+        nativeProfessionalText.text = "--"
+        nativeProfessionalText.setTextColor(0xFF1A5A3A.toInt())
+        nativeProfessionalText.textSize = 20f
+        nativeProfessionalText.gravity = Gravity.CENTER
+        nativeProfessionalText.typeface = Typeface.DEFAULT_BOLD
+        nativeProfessionalText.maxLines = 2
+        profBlock.addView(nativeProfessionalText, LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            topMargin = dp(4)
+        })
+
+        // Texto de atualizacao (menor, no rodape do card)
         nativeUpdatedText = TextView(this)
         nativeUpdatedText.text = ""
-        nativeUpdatedText.setTextColor(0xFF69645E.toInt())
-        nativeUpdatedText.textSize = 15f
-        nativeUpdatedText.gravity = Gravity.START
+        nativeUpdatedText.setTextColor(0xFF7A9A8A.toInt())
+        nativeUpdatedText.textSize = 13f
+        nativeUpdatedText.gravity = Gravity.CENTER
         nativeCurrentCard.addView(nativeUpdatedText, LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         ).apply {
-            topMargin = dp(14)
+            topMargin = dp(12)
         })
 
+        // COLUNA LATERAL - Historico e Video
         nativeSideColumn = LinearLayout(this)
         nativeSideColumn.orientation = LinearLayout.VERTICAL
-        nativeBodyRow.addView(nativeSideColumn, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.02f))
+        nativeBodyRow.addView(nativeSideColumn, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.0f))
 
+        // CARD DE HISTORICO - Design limpo
         nativeHistoryCard = LinearLayout(this)
         nativeHistoryCard.orientation = LinearLayout.VERTICAL
-        nativeHistoryCard.setPadding(dp(26), dp(24), dp(26), dp(24))
+        nativeHistoryCard.setPadding(dp(20), dp(18), dp(20), dp(18))
         nativeHistoryCard.background = createGradientCardDrawable(
-            startColor = 0xFFFFFEFC.toInt(),
-            endColor = 0xFFFBF6F0.toInt(),
-            strokeColor = 0xFFE4D8CA.toInt(),
+            startColor = 0xFFFFFFFF.toInt(),
+            endColor = 0xFFF8FCF9.toInt(),
+            strokeColor = 0xFFD0E8DC.toInt(),
             strokeWidth = dp(1),
-            radiusDp = 32
+            radiusDp = 20
         )
-        nativeHistoryCard.elevation = dp(8).toFloat()
+        nativeHistoryCard.elevation = dp(6).toFloat()
         nativeSideColumn.addView(nativeHistoryCard, LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             0,
-            0.42f
+            0.45f
+        ))
+
+        // Header do historico
+        val historyHeader = LinearLayout(this)
+        historyHeader.orientation = LinearLayout.HORIZONTAL
+        historyHeader.gravity = Gravity.CENTER_VERTICAL
+        nativeHistoryCard.addView(historyHeader, LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
         ))
 
         val lastLabel = TextView(this)
         nativeHistoryTitleText = lastLabel
         lastLabel.text = "ULTIMAS CHAMADAS"
-        lastLabel.setTextColor(0xFF202020.toInt())
-        lastLabel.textSize = 24f
+        lastLabel.setTextColor(0xFF1A5A3A.toInt())
+        lastLabel.textSize = 18f
         lastLabel.typeface = Typeface.DEFAULT_BOLD
-        nativeHistoryCard.addView(lastLabel)
+        lastLabel.letterSpacing = 0.05f
+        historyHeader.addView(lastLabel, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
 
+        // Hint text (oculto)
         nativeHistoryHintText = TextView(this)
-        nativeHistoryHintText.text = "Historico recente com leitura rapida para equipe, recepcao e pacientes em espera."
-        nativeHistoryHintText.setTextColor(0xFF625F5A.toInt())
-        nativeHistoryHintText.textSize = 14f
-        nativeHistoryHintText.setLineSpacing(0f, 1.08f)
-        nativeHistoryCard.addView(nativeHistoryHintText, LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        ).apply {
-            topMargin = dp(6)
-            bottomMargin = dp(10)
-        })
+        nativeHistoryHintText.text = ""
+        nativeHistoryHintText.textSize = 0f
+        nativeHistoryHintText.isVisible = false
+        nativeHistoryCard.addView(nativeHistoryHintText)
 
         val scroll = ScrollView(this)
         scroll.isFillViewport = true
@@ -1362,46 +1406,34 @@ class MainActivity : AppCompatActivity() {
         scroll.addView(nativeList)
         nativeHistoryCard.addView(scroll, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f))
 
+        // CARD DE MIDIA - Fullbleed sem bordas, video grande
         nativeMediaCard = LinearLayout(this)
         nativeMediaCard.orientation = LinearLayout.VERTICAL
-        nativeMediaCard.setPadding(dp(24), dp(24), dp(24), dp(24))
-        nativeMediaCard.background = createGradientCardDrawable(
-            startColor = 0xFFFFFEFC.toInt(),
-            endColor = 0xFFFAF4EC.toInt(),
-            strokeColor = 0xFFE3D8CB.toInt(),
-            strokeWidth = dp(1),
-            radiusDp = 32
-        )
-        nativeMediaCard.elevation = dp(8).toFloat()
+        nativeMediaCard.setPadding(0, 0, 0, 0) // Sem padding para fullbleed
+        nativeMediaCard.setBackgroundColor(0xFF000000.toInt()) // Fundo preto para video
+        nativeMediaCard.elevation = dp(4).toFloat()
         nativeMediaCard.isVisible = false
         nativeSideColumn.addView(nativeMediaCard, LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             0,
-            0.58f
+            0.55f // Video ocupa mais espaco
         ).apply {
-            topMargin = dp(18)
+            topMargin = dp(12)
         })
 
+        // Titulo e hint ocultos (video fullbleed nao precisa)
         val mediaLabel = TextView(this)
         nativeMediaTitleText = mediaLabel
-        mediaLabel.text = "MIDIA DA UNIDADE"
-        mediaLabel.setTextColor(0xFF202020.toInt())
-        mediaLabel.textSize = 24f
-        mediaLabel.typeface = Typeface.DEFAULT_BOLD
+        mediaLabel.text = ""
+        mediaLabel.textSize = 0f
+        mediaLabel.isVisible = false
         nativeMediaCard.addView(mediaLabel)
 
         nativeMediaHintText = TextView(this)
-        nativeMediaHintText.text = "Video, orientacao institucional ou comunicados visuais para a sala."
-        nativeMediaHintText.setTextColor(0xFF625F5A.toInt())
-        nativeMediaHintText.textSize = 14f
-        nativeMediaHintText.setLineSpacing(0f, 1.08f)
-        nativeMediaCard.addView(nativeMediaHintText, LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        ).apply {
-            topMargin = dp(6)
-            bottomMargin = dp(10)
-        })
+        nativeMediaHintText.text = ""
+        nativeMediaHintText.textSize = 0f
+        nativeMediaHintText.isVisible = false
+        nativeMediaCard.addView(nativeMediaHintText)
 
         showEmptyHistoryState()
         return root
@@ -1503,13 +1535,11 @@ class MainActivity : AppCompatActivity() {
         created.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean = false
         }
+        // Fullbleed - preenche todo o card sem margens
         nativeMediaCard.addView(created, LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
-            0,
-            1f
-        ).apply {
-            topMargin = dp(14)
-        })
+            LinearLayout.LayoutParams.MATCH_PARENT
+        ))
         nativeMediaWebView = created
         return created
     }
@@ -1792,70 +1822,97 @@ class MainActivity : AppCompatActivity() {
         val priorityStyle = resolvePriorityStyle(call)
         val theme = currentTheme()
         val visualStyle = currentThemeStyle()
+        
+        // Row principal - layout horizontal moderno
         val row = LinearLayout(this)
-        row.orientation = LinearLayout.VERTICAL
-        row.setPadding(
-            dp(visualStyle.historyRowPadHDp),
-            dp(visualStyle.historyRowPadVDp),
-            dp(visualStyle.historyRowPadHDp),
-            dp(visualStyle.historyRowPadVDp)
-        )
+        row.orientation = LinearLayout.HORIZONTAL
+        row.gravity = Gravity.CENTER_VERTICAL
+        row.setPadding(dp(14), dp(12), dp(14), dp(12))
         row.background = createGradientCardDrawable(
-            startColor = priorityStyle.rowBackground,
-            endColor = priorityStyle.rowEndBackground,
-            strokeColor = priorityStyle.strokeColor,
-            strokeWidth = dp(visualStyle.sideStrokeWidthDp),
-            radiusDp = visualStyle.rowRadiusDp
+            startColor = 0xFFFFFFFF.toInt(),
+            endColor = 0xFFFAFDFB.toInt(),
+            strokeColor = 0xFFE0F0E8.toInt(),
+            strokeWidth = dp(1),
+            radiusDp = 12
         )
         row.layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         ).apply {
-            topMargin = dp(visualStyle.historyRowSpacingDp)
+            topMargin = dp(8)
         }
 
+        // Indicador de prioridade colorido (barra vertical)
+        val indicator = View(this)
+        indicator.setBackgroundColor(priorityStyle.accentColor)
+        row.addView(indicator, LinearLayout.LayoutParams(dp(4), dp(44)).apply {
+            marginEnd = dp(12)
+        })
+
+        // Bloco de informacoes
+        val infoBlock = LinearLayout(this)
+        infoBlock.orientation = LinearLayout.VERTICAL
+        row.addView(infoBlock, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
+
+        // Nome do paciente
         val patient = TextView(this)
         patient.text = themedDisplayText(call.patient.ifBlank { "--" }, visualStyle.historyPatientUppercase)
         patient.setTextColor(theme.titleColor)
-        patient.textSize = visualStyle.historyPatientSize
-        patient.typeface = if (theme.patientSerif) Typeface.create(Typeface.SERIF, Typeface.BOLD) else Typeface.DEFAULT_BOLD
-        patient.maxLines = 2
+        patient.textSize = 16f
+        patient.typeface = Typeface.DEFAULT_BOLD
+        patient.maxLines = 1
         patient.ellipsize = TextUtils.TruncateAt.END
-        row.addView(patient)
+        infoBlock.addView(patient)
 
-        if (priorityStyle.badge.isNotBlank()) {
+        // Detalhes (sala e profissional)
+        val detail = TextView(this)
+        detail.text = buildString {
+            append(call.room.ifBlank { "--" })
+            if (call.professional.isNotBlank()) append(" - ").append(call.professional)
+        }
+        detail.setTextColor(theme.mutedColor)
+        detail.textSize = 13f
+        detail.maxLines = 1
+        detail.ellipsize = TextUtils.TruncateAt.END
+        infoBlock.addView(detail, LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            topMargin = dp(2)
+        })
+
+        // Badge de prioridade (lado direito)
+        if (priorityStyle.badge.isNotBlank() && !priorityStyle.badge.contains("PAINEL", ignoreCase = true)) {
             val badge = TextView(this)
-            badge.text = priorityStyle.badge
-            badge.setTextColor(priorityStyle.accentColor)
-            badge.textSize = 11f
+            badge.text = priorityStyle.badge.take(3) // Abrevia: EME, URG, NOR
+            badge.setTextColor(0xFFFFFFFF.toInt())
+            badge.textSize = 10f
             badge.typeface = Typeface.DEFAULT_BOLD
-            badge.setPadding(dp(10), dp(6), dp(10), dp(6))
-            badge.background = createPillDrawable(priorityStyle.badgeBackground, priorityStyle.strokeColor)
+            badge.gravity = Gravity.CENTER
+            badge.setPadding(dp(8), dp(4), dp(8), dp(4))
+            badge.background = createPillDrawable(priorityStyle.accentColor, priorityStyle.accentColor)
             row.addView(badge, LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
-                topMargin = dp(8)
+                marginStart = dp(8)
             })
         }
 
-        val detail = TextView(this)
-        detail.text = buildString {
-            append(call.room.ifBlank { "--" })
-            if (call.professional.isNotBlank()) append(" | ").append(call.professional)
-            if (call.updatedAt.isNotBlank()) append("\n").append(formatSigssTime(call.updatedAt))
+        // Hora (lado direito)
+        if (call.updatedAt.isNotBlank()) {
+            val time = TextView(this)
+            time.text = formatSigssTime(call.updatedAt)
+            time.setTextColor(theme.mutedColor)
+            time.textSize = 12f
+            time.gravity = Gravity.END
+            row.addView(time, LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                marginStart = dp(8)
+            })
         }
-        detail.setTextColor(theme.mutedColor)
-        detail.textSize = visualStyle.historyDetailSize
-        detail.setLineSpacing(0f, 1.08f)
-        detail.maxLines = 3
-        detail.ellipsize = TextUtils.TruncateAt.END
-        row.addView(detail, LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        ).apply {
-            topMargin = dp(8)
-        })
 
         return row
     }
@@ -2700,11 +2757,19 @@ class MainActivity : AppCompatActivity() {
             radiusDp = visualStyle.logoRadiusDp
         )
         (nativeUnitLogoView.layoutParams as? LinearLayout.LayoutParams)?.let { params ->
-            val size = if (currentThemeId == "sus_institucional") dp(78) else if (currentThemeId == "tech_light") dp(72) else dp(84)
+            val size = dp(72)
             params.width = size
             params.height = size
             nativeUnitLogoView.layoutParams = params
         }
+        // Header colorido - textos brancos
+        val isHeaderDark = currentThemeId in listOf("sus_verde", "hospital_azul", "clinica_moderna", "emergencia")
+        val headerTextColor = if (isHeaderDark) 0xFFFFFFFF.toInt() else theme.titleColor
+        val headerMutedColor = if (isHeaderDark) 0xCCFFFFFF.toInt() else theme.mutedColor
+        nativeUnitNameText.setTextColor(headerTextColor)
+        nativeUnitSubtitleText.setTextColor(headerMutedColor)
+        nativeClockText.setTextColor(headerTextColor)
+        nativeDateText.setTextColor(headerMutedColor)
         nativeCurrentCard.setPadding(
             dp(visualStyle.currentPadHDp),
             dp(visualStyle.currentPadVDp),
@@ -2733,20 +2798,10 @@ class MainActivity : AppCompatActivity() {
             radiusDp = visualStyle.sideRadiusDp
         )
         nativeHistoryCard.elevation = dp(visualStyle.sideElevationDp).toFloat()
-        nativeMediaCard.setPadding(
-            dp(visualStyle.mediaPadHDp),
-            dp(visualStyle.mediaPadVDp),
-            dp(visualStyle.mediaPadHDp),
-            dp(visualStyle.mediaPadVDp)
-        )
-        nativeMediaCard.background = createGradientCardDrawable(
-            startColor = theme.mediaStart,
-            endColor = theme.mediaEnd,
-            strokeColor = theme.mediaStroke,
-            strokeWidth = dp(visualStyle.sideStrokeWidthDp),
-            radiusDp = visualStyle.sideRadiusDp
-        )
-        nativeMediaCard.elevation = dp(visualStyle.sideElevationDp).toFloat()
+        // Media card - fullbleed sem padding nem bordas para video limpo
+        nativeMediaCard.setPadding(0, 0, 0, 0)
+        nativeMediaCard.setBackgroundColor(0xFF000000.toInt()) // Fundo preto para video
+        nativeMediaCard.elevation = dp(4).toFloat()
         nativeCurrentLabelText.setTextColor(theme.chipTextColor)
         nativeCurrentLabelText.background = createPillDrawable(theme.chipBackground, theme.chipStroke)
         nativeCurrentLabelText.textSize = visualStyle.chipTextSize
@@ -2757,8 +2812,7 @@ class MainActivity : AppCompatActivity() {
             dp(visualStyle.chipPadHDp),
             dp(visualStyle.chipPadVDp)
         )
-        nativeUnitNameText.setTextColor(theme.titleColor)
-        nativeUnitNameText.text = themedDisplayText(currentUnitName.ifBlank { "Painel de chamados" }, visualStyle.patientUppercase)
+        nativeUnitNameText.text = themedDisplayText(currentUnitName.ifBlank { "PAINEL DE CHAMADOS" }, visualStyle.patientUppercase)
         nativePatientText.setTextColor(theme.patientColor)
         nativePatientText.typeface = if (theme.patientSerif) Typeface.create(Typeface.SERIF, Typeface.BOLD) else Typeface.DEFAULT_BOLD
         nativePatientText.textSize = visualStyle.patientSize
@@ -2847,23 +2901,23 @@ class MainActivity : AppCompatActivity() {
     private fun showEmptyHistoryState() {
         nativeList.removeAllViews()
         val empty = TextView(this)
-        empty.text = "Nenhum chamado recente para exibir neste momento."
-        empty.setTextColor(0xFF6D6862.toInt())
-        empty.textSize = 18f
+        empty.text = "Aguardando chamadas..."
+        empty.setTextColor(0xFF7A9A8A.toInt())
+        empty.textSize = 15f
         empty.gravity = Gravity.CENTER
-        empty.setPadding(dp(14), dp(34), dp(14), dp(34))
+        empty.setPadding(dp(14), dp(24), dp(14), dp(24))
         empty.background = createGradientCardDrawable(
-            startColor = 0xFFFFFDFA.toInt(),
-            endColor = 0xFFF7F1EA.toInt(),
-            strokeColor = 0xFFE5DACE.toInt(),
+            startColor = 0xFFF5FBF8.toInt(),
+            endColor = 0xFFEDF7F2.toInt(),
+            strokeColor = 0xFFD0E8DC.toInt(),
             strokeWidth = dp(1),
-            radiusDp = 24
+            radiusDp = 12
         )
         nativeList.addView(empty, LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         ).apply {
-            topMargin = dp(12)
+            topMargin = dp(10)
         })
     }
 
@@ -3023,6 +3077,59 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
+
+    private val clockUpdateRunnable = object : Runnable {
+        override fun run() {
+            updateClockDisplay()
+            mainHandler.postDelayed(this, 1000L)
+        }
+    }
+
+    private fun startClockUpdates() {
+        mainHandler.removeCallbacks(clockUpdateRunnable)
+        mainHandler.post(clockUpdateRunnable)
+    }
+
+    private fun stopClockUpdates() {
+        mainHandler.removeCallbacks(clockUpdateRunnable)
+    }
+
+    private fun updateClockDisplay() {
+        try {
+            val now = java.util.Calendar.getInstance()
+            val hour = now.get(java.util.Calendar.HOUR_OF_DAY)
+            val minute = now.get(java.util.Calendar.MINUTE)
+            nativeClockText.text = String.format("%02d:%02d", hour, minute)
+            
+            val dayOfWeek = when (now.get(java.util.Calendar.DAY_OF_WEEK)) {
+                java.util.Calendar.SUNDAY -> "Domingo"
+                java.util.Calendar.MONDAY -> "Segunda-feira"
+                java.util.Calendar.TUESDAY -> "Terca-feira"
+                java.util.Calendar.WEDNESDAY -> "Quarta-feira"
+                java.util.Calendar.THURSDAY -> "Quinta-feira"
+                java.util.Calendar.FRIDAY -> "Sexta-feira"
+                java.util.Calendar.SATURDAY -> "Sabado"
+                else -> ""
+            }
+            val day = now.get(java.util.Calendar.DAY_OF_MONTH)
+            val month = when (now.get(java.util.Calendar.MONTH)) {
+                java.util.Calendar.JANUARY -> "Janeiro"
+                java.util.Calendar.FEBRUARY -> "Fevereiro"
+                java.util.Calendar.MARCH -> "Marco"
+                java.util.Calendar.APRIL -> "Abril"
+                java.util.Calendar.MAY -> "Maio"
+                java.util.Calendar.JUNE -> "Junho"
+                java.util.Calendar.JULY -> "Julho"
+                java.util.Calendar.AUGUST -> "Agosto"
+                java.util.Calendar.SEPTEMBER -> "Setembro"
+                java.util.Calendar.OCTOBER -> "Outubro"
+                java.util.Calendar.NOVEMBER -> "Novembro"
+                java.util.Calendar.DECEMBER -> "Dezembro"
+                else -> ""
+            }
+            nativeDateText.text = "$dayOfWeek, $day de $month"
+        } catch (_: Throwable) { }
+    }
 
     private fun hideOverlay() {
         overlayRoot.isVisible = false
