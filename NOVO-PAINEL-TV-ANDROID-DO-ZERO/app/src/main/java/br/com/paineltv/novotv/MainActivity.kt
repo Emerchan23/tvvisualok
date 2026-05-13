@@ -1097,7 +1097,7 @@ class MainActivity : AppCompatActivity() {
         nativeUnitNameText = TextView(this)
         nativeUnitNameText.text = "PAINEL DE CHAMADOS"
         nativeUnitNameText.setTextColor(0xFFFFFFFF.toInt())
-        nativeUnitNameText.textSize = 26f
+        nativeUnitNameText.textSize = sp(26f)
         nativeUnitNameText.typeface = Typeface.DEFAULT_BOLD
         nativeUnitNameText.letterSpacing = 0.02f
         nativeUnitNameText.maxLines = 1
@@ -1106,7 +1106,7 @@ class MainActivity : AppCompatActivity() {
         nativeUnitSubtitleText = TextView(this)
         nativeUnitSubtitleText.text = "Sistema Unico de Saude"
         nativeUnitSubtitleText.setTextColor(0xCCFFFFFF.toInt())
-        nativeUnitSubtitleText.textSize = 14f
+        nativeUnitSubtitleText.textSize = sp(14f)
         nativeUnitSubtitleText.letterSpacing = 0.04f
         nativeUnitSubtitleText.isVisible = true
         titleBlock.addView(nativeUnitSubtitleText, LinearLayout.LayoutParams(
@@ -1144,7 +1144,7 @@ class MainActivity : AppCompatActivity() {
         nativeClockText = TextView(this)
         nativeClockText.text = "00:00"
         nativeClockText.setTextColor(0xFFFFFFFF.toInt())
-        nativeClockText.textSize = 42f
+        nativeClockText.textSize = sp(42f)
         nativeClockText.typeface = Typeface.create("sans-serif-light", Typeface.NORMAL)
         nativeClockText.gravity = Gravity.END
         nativeClockText.letterSpacing = -0.02f
@@ -1153,7 +1153,7 @@ class MainActivity : AppCompatActivity() {
         nativeDateText = TextView(this)
         nativeDateText.text = "Segunda-feira, 01 de Janeiro"
         nativeDateText.setTextColor(0xCCFFFFFF.toInt())
-        nativeDateText.textSize = 14f
+        nativeDateText.textSize = sp(14f)
         nativeDateText.gravity = Gravity.END
         nativeDateText.letterSpacing = 0.02f
         clockBlock.addView(nativeDateText, LinearLayout.LayoutParams(
@@ -1205,7 +1205,7 @@ class MainActivity : AppCompatActivity() {
         nativeCurrentLabelText = TextView(this)
         nativeCurrentLabelText.text = "CHAMANDO"
         nativeCurrentLabelText.setTextColor(0xFFFFFFFF.toInt())
-        nativeCurrentLabelText.textSize = 16f
+        nativeCurrentLabelText.textSize = sp(16f)
         nativeCurrentLabelText.typeface = Typeface.DEFAULT_BOLD
         nativeCurrentLabelText.letterSpacing = 0.12f
         nativeCurrentLabelText.setPadding(dp(24), dp(12), dp(24), dp(12))
@@ -1228,7 +1228,7 @@ class MainActivity : AppCompatActivity() {
         nativePriorityText = TextView(this)
         nativePriorityText.text = ""
         nativePriorityText.setTextColor(0xFFFFFFFF.toInt())
-        nativePriorityText.textSize = 14f
+        nativePriorityText.textSize = sp(14f)
         nativePriorityText.typeface = Typeface.DEFAULT_BOLD
         nativePriorityText.gravity = Gravity.CENTER
         nativePriorityText.letterSpacing = 0.08f
@@ -1242,7 +1242,7 @@ class MainActivity : AppCompatActivity() {
         nativePatientText = TextView(this)
         nativePatientText.text = "--"
         nativePatientText.setTextColor(0xFF1A1A1A.toInt())
-        nativePatientText.textSize = 64f
+        nativePatientText.textSize = sp(64f)
         nativePatientText.typeface = Typeface.DEFAULT_BOLD
         nativePatientText.gravity = Gravity.CENTER
         nativePatientText.maxLines = 2
@@ -1282,7 +1282,7 @@ class MainActivity : AppCompatActivity() {
         val roomLabel = TextView(this)
         roomLabel.text = "SALA"
         roomLabel.setTextColor(0xFF5A8A6A.toInt())
-        roomLabel.textSize = 12f
+        roomLabel.textSize = sp(12f)
         roomLabel.typeface = Typeface.DEFAULT_BOLD
         roomLabel.letterSpacing = 0.1f
         roomLabel.gravity = Gravity.CENTER
@@ -1291,7 +1291,7 @@ class MainActivity : AppCompatActivity() {
         nativeRoomText = TextView(this)
         nativeRoomText.text = "--"
         nativeRoomText.setTextColor(0xFF1A5A3A.toInt())
-        nativeRoomText.textSize = 32f
+        nativeRoomText.textSize = sp(32f)
         nativeRoomText.gravity = Gravity.CENTER
         nativeRoomText.typeface = Typeface.DEFAULT_BOLD
         roomBlock.addView(nativeRoomText, LinearLayout.LayoutParams(
@@ -1318,7 +1318,7 @@ class MainActivity : AppCompatActivity() {
         val profLabel = TextView(this)
         profLabel.text = "PROFISSIONAL"
         profLabel.setTextColor(0xFF5A8A6A.toInt())
-        profLabel.textSize = 12f
+        profLabel.textSize = sp(12f)
         profLabel.typeface = Typeface.DEFAULT_BOLD
         profLabel.letterSpacing = 0.1f
         profLabel.gravity = Gravity.CENTER
@@ -1327,7 +1327,7 @@ class MainActivity : AppCompatActivity() {
         nativeProfessionalText = TextView(this)
         nativeProfessionalText.text = "--"
         nativeProfessionalText.setTextColor(0xFF1A5A3A.toInt())
-        nativeProfessionalText.textSize = 20f
+        nativeProfessionalText.textSize = sp(20f)
         nativeProfessionalText.gravity = Gravity.CENTER
         nativeProfessionalText.typeface = Typeface.DEFAULT_BOLD
         nativeProfessionalText.maxLines = 2
@@ -1342,7 +1342,7 @@ class MainActivity : AppCompatActivity() {
         nativeUpdatedText = TextView(this)
         nativeUpdatedText.text = ""
         nativeUpdatedText.setTextColor(0xFF7A9A8A.toInt())
-        nativeUpdatedText.textSize = 13f
+        nativeUpdatedText.textSize = sp(13f)
         nativeUpdatedText.gravity = Gravity.CENTER
         nativeCurrentCard.addView(nativeUpdatedText, LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -1387,7 +1387,7 @@ class MainActivity : AppCompatActivity() {
         nativeHistoryTitleText = lastLabel
         lastLabel.text = "ULTIMAS CHAMADAS"
         lastLabel.setTextColor(0xFF1A5A3A.toInt())
-        lastLabel.textSize = 18f
+        lastLabel.textSize = sp(18f)
         lastLabel.typeface = Typeface.DEFAULT_BOLD
         lastLabel.letterSpacing = 0.05f
         historyHeader.addView(lastLabel, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
@@ -1858,7 +1858,7 @@ class MainActivity : AppCompatActivity() {
         val patient = TextView(this)
         patient.text = themedDisplayText(call.patient.ifBlank { "--" }, visualStyle.historyPatientUppercase)
         patient.setTextColor(theme.titleColor)
-        patient.textSize = 16f
+        patient.textSize = sp(16f)
         patient.typeface = Typeface.DEFAULT_BOLD
         patient.maxLines = 1
         patient.ellipsize = TextUtils.TruncateAt.END
@@ -1871,7 +1871,7 @@ class MainActivity : AppCompatActivity() {
             if (call.professional.isNotBlank()) append(" - ").append(call.professional)
         }
         detail.setTextColor(theme.mutedColor)
-        detail.textSize = 13f
+        detail.textSize = sp(13f)
         detail.maxLines = 1
         detail.ellipsize = TextUtils.TruncateAt.END
         infoBlock.addView(detail, LinearLayout.LayoutParams(
@@ -1886,7 +1886,7 @@ class MainActivity : AppCompatActivity() {
             val badge = TextView(this)
             badge.text = priorityStyle.badge.take(3) // Abrevia: EME, URG, NOR
             badge.setTextColor(0xFFFFFFFF.toInt())
-            badge.textSize = 10f
+            badge.textSize = sp(10f)
             badge.typeface = Typeface.DEFAULT_BOLD
             badge.gravity = Gravity.CENTER
             badge.setPadding(dp(8), dp(4), dp(8), dp(4))
@@ -1904,7 +1904,7 @@ class MainActivity : AppCompatActivity() {
             val time = TextView(this)
             time.text = formatSigssTime(call.updatedAt)
             time.setTextColor(theme.mutedColor)
-            time.textSize = 12f
+            time.textSize = sp(12f)
             time.gravity = Gravity.END
             row.addView(time, LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -2903,7 +2903,7 @@ class MainActivity : AppCompatActivity() {
         val empty = TextView(this)
         empty.text = "Aguardando chamadas..."
         empty.setTextColor(0xFF7A9A8A.toInt())
-        empty.textSize = 15f
+        empty.textSize = sp(15f)
         empty.gravity = Gravity.CENTER
         empty.setPadding(dp(14), dp(24), dp(14), dp(24))
         empty.background = createGradientCardDrawable(
@@ -3076,7 +3076,26 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
+    private fun dp(value: Int): Int = (value * resources.displayMetrics.density * screenScale).toInt()
+
+    // Escala responsiva baseada no tamanho da tela
+    // TV 32" (720p) = escala menor, TV 55"+ (1080p/4K) = escala normal
+    private val screenScale: Float by lazy {
+        val metrics = resources.displayMetrics
+        val screenWidthDp = metrics.widthPixels / metrics.density
+        when {
+            screenWidthDp < 960 -> 0.70f   // TV pequena 32" ou menor (720p)
+            screenWidthDp < 1280 -> 0.82f  // TV media 40-43" (1080p)
+            screenWidthDp < 1600 -> 0.92f  // TV grande 50-55" (1080p)
+            else -> 1.0f                    // TV muito grande 60"+ ou 4K
+        }
+    }
+
+    // Escala de fonte - proporcional mas com minimo legivel
+    private fun sp(value: Float): Float {
+        val scaled = value * screenScale
+        return scaled.coerceAtLeast(value * 0.65f) // Nunca menor que 65% do original
+    }
 
     private val clockUpdateRunnable = object : Runnable {
         override fun run() {
