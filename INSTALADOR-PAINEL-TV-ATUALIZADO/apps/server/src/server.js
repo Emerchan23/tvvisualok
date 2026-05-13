@@ -127,7 +127,9 @@ const SUPPORTED_THEME_IDS = new Set([
   "sus_institucional",
   "tech_light",
   "hospital_blue",
-  "contrast_gold"
+  "contrast_gold",
+  "dark_modern",
+  "high_contrast"
 ]);
 
 function now() {

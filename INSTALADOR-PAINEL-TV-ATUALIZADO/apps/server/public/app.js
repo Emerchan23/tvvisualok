@@ -125,6 +125,8 @@ function themeLabel(value) {
   if (value === "tech_light") return "Tech Light";
   if (value === "hospital_blue") return "Hospital Blue";
   if (value === "contrast_gold") return "Contrast Gold";
+  if (value === "dark_modern") return "Escuro Moderno";
+  if (value === "high_contrast") return "Alto Contraste";
   return "Classic Warm";
 }
 

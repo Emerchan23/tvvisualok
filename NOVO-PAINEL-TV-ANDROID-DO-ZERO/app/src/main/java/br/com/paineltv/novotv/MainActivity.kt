@@ -1760,8 +1760,13 @@ class MainActivity : AppCompatActivity() {
         animateCurrentCallCard(priorityStyle, isNewCall)
 
         nativeList.removeAllViews()
-        calls.take(maxHistoryItems()).forEach { call ->
-            nativeList.addView(createNativeCallRow(call))
+        calls.take(maxHistoryItems()).forEachIndexed { index, call ->
+            val row = createNativeCallRow(call)
+            nativeList.addView(row)
+            // Cascade animation: each row appears 50ms after the previous
+            if (isNewCall) {
+                animateHistoryRowEntry(row, (index * 50 + 400).toLong())
+            }
         }
 
         val phrase = buildAnnouncement(current.patient, current.room, current.professional)
@@ -1878,6 +1883,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun themedPriorityStyle(level: String): PriorityStyle {
         return when (currentThemeId) {
+            "dark_modern" -> when (level) {
+                "emergency" -> PriorityStyle("EMERGENCIA", 0xFFFF4757.toInt(), 0xFF2A1215.toInt(), 0xFF3D1A1E.toInt(), 0xFF1A1A1F.toInt(), 0xFF2A1518.toInt(), 0xFF4A1F24.toInt(), 0xFF5A252B.toInt(), 1.06f)
+                "urgent" -> PriorityStyle("URGENTE", 0xFFFFA502.toInt(), 0xFF2A2210.toInt(), 0xFF3D3218.toInt(), 0xFF1A1A1F.toInt(), 0xFF2A2515.toInt(), 0xFF4A3F1F.toInt(), 0xFF5A4C25.toInt(), 1.05f)
+                "normal" -> PriorityStyle("ATENDIMENTO NORMAL", 0xFF2ED573.toInt(), 0xFF152A1A.toInt(), 0xFF1E3D24.toInt(), 0xFF1A1A1F.toInt(), 0xFF182A1C.toInt(), 0xFF254A2F.toInt(), 0xFF2E5A38.toInt(), 1.03f)
+                else -> PriorityStyle("CHAMADO EM PAINEL", 0xFF60A5FA.toInt(), 0xFF1A1A1F.toInt(), 0xFF1E3A5F.toInt(), 0xFF1A1A1F.toInt(), 0xFF182840.toInt(), 0xFF1E3A5F.toInt(), 0xFF2563EB.toInt(), 1.03f)
+            }
+            "high_contrast" -> when (level) {
+                "emergency" -> PriorityStyle("EMERGENCIA", 0xFFFF0000.toInt(), 0xFF000000.toInt(), 0xFF330000.toInt(), 0xFF000000.toInt(), 0xFF1A0000.toInt(), 0xFFFF0000.toInt(), 0xFFFF0000.toInt(), 1.08f)
+                "urgent" -> PriorityStyle("URGENTE", 0xFFFFFF00.toInt(), 0xFF000000.toInt(), 0xFF333300.toInt(), 0xFF000000.toInt(), 0xFF1A1A00.toInt(), 0xFFFFFF00.toInt(), 0xFFFFFF00.toInt(), 1.06f)
+                "normal" -> PriorityStyle("ATENDIMENTO NORMAL", 0xFF00FF00.toInt(), 0xFF000000.toInt(), 0xFF003300.toInt(), 0xFF000000.toInt(), 0xFF001A00.toInt(), 0xFF00FF00.toInt(), 0xFF00FF00.toInt(), 1.04f)
+                else -> PriorityStyle("CHAMADO EM PAINEL", 0xFFFFD700.toInt(), 0xFF000000.toInt(), 0xFF1A1500.toInt(), 0xFF000000.toInt(), 0xFF0D0A00.toInt(), 0xFFFFD700.toInt(), 0xFFFFD700.toInt(), 1.04f)
+            }
             "sus_institucional" -> when (level) {
                 "emergency" -> PriorityStyle("EMERGENCIA", 0xFFB43A4A.toInt(), 0xFFFFF4F6.toInt(), 0xFFFFE7EB.toInt(), 0xFFFFFAFB.toInt(), 0xFFFFEFF2.toInt(), 0xFFFFD9E0.toInt(), 0xFFF0B9C4.toInt(), 1.05f)
                 "urgent" -> PriorityStyle("URGENTE", 0xFF9A6800.toInt(), 0xFFFFFAEE.toInt(), 0xFFFFEFD1.toInt(), 0xFFFFFCF5.toInt(), 0xFFFFF4E1.toInt(), 0xFFFFE6B3.toInt(), 0xFFEBCB84.toInt(), 1.04f)
@@ -1956,6 +1973,66 @@ class MainActivity : AppCompatActivity() {
 
     private fun currentTheme(): NativeTheme {
         return when (currentThemeId) {
+            "dark_modern" -> NativeTheme(
+                backgroundStart = 0xFF0A0A0B.toInt(),
+                backgroundEnd = 0xFF151518.toInt(),
+                headerStart = 0xFF1A1A1F.toInt(),
+                headerEnd = 0xFF141418.toInt(),
+                headerStroke = 0xFF2A2A30.toInt(),
+                logoStart = 0xFF1E1E24.toInt(),
+                logoEnd = 0xFF18181C.toInt(),
+                logoStroke = 0xFF2D2D35.toInt(),
+                currentStart = 0xFF1A1A1F.toInt(),
+                currentEnd = 0xFF121216.toInt(),
+                currentStroke = 0xFF2563EB.toInt(),
+                historyStart = 0xFF1A1A1F.toInt(),
+                historyEnd = 0xFF141418.toInt(),
+                historyStroke = 0xFF2A2A30.toInt(),
+                mediaStart = 0xFF1A1A1F.toInt(),
+                mediaEnd = 0xFF141418.toInt(),
+                mediaStroke = 0xFF2A2A30.toInt(),
+                surfaceStart = 0xFF1E1E24.toInt(),
+                surfaceEnd = 0xFF18181C.toInt(),
+                surfaceStroke = 0xFF2D2D35.toInt(),
+                titleColor = 0xFFFFFFFF.toInt(),
+                bodyColor = 0xFFCCCCCC.toInt(),
+                mutedColor = 0xFF999999.toInt(),
+                patientColor = 0xFFFFFFFF.toInt(),
+                patientSerif = false,
+                chipTextColor = 0xFF60A5FA.toInt(),
+                chipBackground = 0xFF1E3A5F.toInt(),
+                chipStroke = 0xFF2563EB.toInt()
+            )
+            "high_contrast" -> NativeTheme(
+                backgroundStart = 0xFF000000.toInt(),
+                backgroundEnd = 0xFF000000.toInt(),
+                headerStart = 0xFF000000.toInt(),
+                headerEnd = 0xFF000000.toInt(),
+                headerStroke = 0xFFFFD700.toInt(),
+                logoStart = 0xFF000000.toInt(),
+                logoEnd = 0xFF000000.toInt(),
+                logoStroke = 0xFFFFD700.toInt(),
+                currentStart = 0xFF000000.toInt(),
+                currentEnd = 0xFF000000.toInt(),
+                currentStroke = 0xFFFFD700.toInt(),
+                historyStart = 0xFF000000.toInt(),
+                historyEnd = 0xFF000000.toInt(),
+                historyStroke = 0xFFFFD700.toInt(),
+                mediaStart = 0xFF000000.toInt(),
+                mediaEnd = 0xFF000000.toInt(),
+                mediaStroke = 0xFFFFD700.toInt(),
+                surfaceStart = 0xFF000000.toInt(),
+                surfaceEnd = 0xFF000000.toInt(),
+                surfaceStroke = 0xFFFFD700.toInt(),
+                titleColor = 0xFFFFFFFF.toInt(),
+                bodyColor = 0xFFFFFFFF.toInt(),
+                mutedColor = 0xFFCCCCCC.toInt(),
+                patientColor = 0xFFFFFFFF.toInt(),
+                patientSerif = false,
+                chipTextColor = 0xFF000000.toInt(),
+                chipBackground = 0xFFFFD700.toInt(),
+                chipStroke = 0xFFFFD700.toInt()
+            )
             "sus_institucional" -> NativeTheme(
                 backgroundStart = 0xFFF4FAFF.toInt(),
                 backgroundEnd = 0xFFE6F3FF.toInt(),
@@ -2111,6 +2188,120 @@ class MainActivity : AppCompatActivity() {
 
     private fun currentThemeStyle(): NativeThemeStyle {
         return when (currentThemeId) {
+            "dark_modern" -> NativeThemeStyle(
+                rootPaddingDp = 18,
+                headerPadHDp = 26,
+                headerPadVDp = 22,
+                currentPadHDp = 32,
+                currentPadVDp = 28,
+                historyPadHDp = 22,
+                historyPadVDp = 20,
+                mediaPadHDp = 20,
+                mediaPadVDp = 18,
+                headerRadiusDp = 20,
+                currentRadiusDp = 24,
+                sideRadiusDp = 18,
+                rowRadiusDp = 14,
+                logoRadiusDp = 16,
+                headerStrokeWidthDp = 1,
+                currentStrokeWidthDp = 2,
+                sideStrokeWidthDp = 1,
+                headerElevationDp = 0,
+                currentElevationDp = 0,
+                sideElevationDp = 0,
+                patientSize = 56f,
+                roomSize = 30f,
+                professionalSize = 19f,
+                prioritySize = 18f,
+                updatedSize = 15f,
+                historyTitleSize = 22f,
+                historyPatientSize = 18f,
+                historyDetailSize = 13f,
+                mediaTitleSize = 22f,
+                chipTextSize = 12f,
+                chipLetterSpacing = 0.22f,
+                chipPadHDp = 16,
+                chipPadVDp = 10,
+                currentNoMediaWeight = 1.44f,
+                currentWithMediaWeight = 0.98f,
+                sideNoMediaWeight = 0.88f,
+                sideWithMediaWeight = 1.26f,
+                historyWithMediaWeight = 0.32f,
+                mediaWithMediaWeight = 0.84f,
+                idleHistoryWeight = 0.70f,
+                idleMediaWeight = 1.30f,
+                historyRowPadHDp = 14,
+                historyRowPadVDp = 12,
+                historyRowSpacingDp = 8,
+                historyPatientUppercase = true,
+                patientUppercase = true,
+                useCurrentHint = true,
+                priorityFullWidth = true,
+                mediaTopMarginDp = 12,
+                animationBlinkAlpha = 0.6f,
+                animationBlinkScale = 1.04f,
+                animationPriorityScale = 1.15f,
+                animationLabelScale = 1.08f,
+                animationIntervalMs = 220L,
+                animationPulseBoost = 0.035f
+            )
+            "high_contrast" -> NativeThemeStyle(
+                rootPaddingDp = 20,
+                headerPadHDp = 28,
+                headerPadVDp = 24,
+                currentPadHDp = 36,
+                currentPadVDp = 32,
+                historyPadHDp = 24,
+                historyPadVDp = 22,
+                mediaPadHDp = 22,
+                mediaPadVDp = 20,
+                headerRadiusDp = 0,
+                currentRadiusDp = 0,
+                sideRadiusDp = 0,
+                rowRadiusDp = 0,
+                logoRadiusDp = 0,
+                headerStrokeWidthDp = 3,
+                currentStrokeWidthDp = 4,
+                sideStrokeWidthDp = 3,
+                headerElevationDp = 0,
+                currentElevationDp = 0,
+                sideElevationDp = 0,
+                patientSize = 72f,
+                roomSize = 38f,
+                professionalSize = 24f,
+                prioritySize = 24f,
+                updatedSize = 18f,
+                historyTitleSize = 28f,
+                historyPatientSize = 24f,
+                historyDetailSize = 16f,
+                mediaTitleSize = 28f,
+                chipTextSize = 16f,
+                chipLetterSpacing = 0.15f,
+                chipPadHDp = 20,
+                chipPadVDp = 12,
+                currentNoMediaWeight = 1.50f,
+                currentWithMediaWeight = 1.04f,
+                sideNoMediaWeight = 0.84f,
+                sideWithMediaWeight = 1.20f,
+                historyWithMediaWeight = 0.36f,
+                mediaWithMediaWeight = 0.78f,
+                idleHistoryWeight = 0.76f,
+                idleMediaWeight = 1.24f,
+                historyRowPadHDp = 16,
+                historyRowPadVDp = 14,
+                historyRowSpacingDp = 10,
+                historyPatientUppercase = true,
+                patientUppercase = true,
+                useCurrentHint = true,
+                priorityFullWidth = true,
+                mediaTopMarginDp = 14,
+                animationBlinkAlpha = 0.5f,
+                animationBlinkScale = 1.05f,
+                animationPriorityScale = 1.18f,
+                animationLabelScale = 1.10f,
+                animationIntervalMs = 350L,
+                animationPulseBoost = 0.04f
+            )
             "sus_institucional" -> NativeThemeStyle(
                 rootPaddingDp = 16,
                 headerPadHDp = 24,
@@ -2608,50 +2799,113 @@ class MainActivity : AppCompatActivity() {
         val visualStyle = currentThemeStyle()
         nativeCurrentCard.animate().cancel()
         nativePriorityText.animate().cancel()
+        nativePatientText.animate().cancel()
+        nativeCurrentLabelText.animate().cancel()
         if (!isNewCall) return
 
-        val baseAlpha = 1f
-        val blinkAlpha = visualStyle.animationBlinkAlpha
-        val basePriorityAlpha = 1f
-        val blinkPriorityAlpha = (visualStyle.animationBlinkAlpha - 0.06f).coerceAtLeast(0.58f)
-        val blinkSteps = 6
-        repeat(blinkSteps) { index ->
-            mainHandler.postDelayed({
-                val highlighted = index % 2 == 0
-                nativeCurrentCard.alpha = if (highlighted) baseAlpha else blinkAlpha
-                nativeCurrentCard.scaleX = if (highlighted) visualStyle.animationBlinkScale else 0.994f
-                nativeCurrentCard.scaleY = if (highlighted) visualStyle.animationBlinkScale else 0.994f
-                nativePriorityText.alpha = if (highlighted) basePriorityAlpha else blinkPriorityAlpha
-                nativePriorityText.scaleX = if (highlighted) visualStyle.animationPriorityScale else 1f
-                nativePriorityText.scaleY = if (highlighted) visualStyle.animationPriorityScale else 1f
-                nativeCurrentLabelText.alpha = if (highlighted) 1f else 0.78f
-                nativeCurrentLabelText.scaleX = if (highlighted) visualStyle.animationLabelScale else 1f
-                nativeCurrentLabelText.scaleY = if (highlighted) visualStyle.animationLabelScale else 1f
-            }, index * visualStyle.animationIntervalMs)
+        // Determine animation intensity based on priority
+        val isEmergency = style.badge.contains("EMERG", ignoreCase = true)
+        val isUrgent = style.badge.contains("URGENT", ignoreCase = true)
+        val blinkSteps = when {
+            isEmergency -> 8
+            isUrgent -> 6
+            else -> 4
         }
-        mainHandler.postDelayed({
-            nativeCurrentCard.alpha = 1f
-            nativePriorityText.alpha = 1f
-            nativePriorityText.scaleX = 1f
-            nativePriorityText.scaleY = 1f
-            nativeCurrentLabelText.alpha = 1f
-            nativeCurrentLabelText.scaleX = 1f
-            nativeCurrentLabelText.scaleY = 1f
-            nativeCurrentCard.scaleX = 0.99f
-            nativeCurrentCard.scaleY = 0.99f
-            nativeCurrentCard.animate()
-                .scaleX(style.pulseScale + visualStyle.animationPulseBoost)
-                .scaleY(style.pulseScale + visualStyle.animationPulseBoost)
-                .setDuration(280L)
-                .withEndAction {
-                    nativeCurrentCard.animate()
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .setDuration(320L)
-                        .start()
+        val intervalMs = when {
+            isEmergency -> (visualStyle.animationIntervalMs * 0.7).toLong()
+            isUrgent -> (visualStyle.animationIntervalMs * 0.85).toLong()
+            else -> visualStyle.animationIntervalMs
+        }
+
+        // Initial slide-in animation from left
+        nativeCurrentCard.translationX = -dp(80).toFloat()
+        nativeCurrentCard.alpha = 0f
+        nativeCurrentCard.scaleX = 0.92f
+        nativeCurrentCard.scaleY = 0.92f
+        
+        nativeCurrentCard.animate()
+            .translationX(0f)
+            .alpha(1f)
+            .scaleX(1f)
+            .scaleY(1f)
+            .setDuration(350L)
+            .setInterpolator(android.view.animation.DecelerateInterpolator(1.5f))
+            .withEndAction {
+                // After slide-in, start the attention blink animation
+                val baseAlpha = 1f
+                val blinkAlpha = visualStyle.animationBlinkAlpha
+                val basePriorityAlpha = 1f
+                val blinkPriorityAlpha = (visualStyle.animationBlinkAlpha - 0.06f).coerceAtLeast(0.58f)
+                
+                repeat(blinkSteps) { index ->
+                    mainHandler.postDelayed({
+                        val highlighted = index % 2 == 0
+                        
+                        // Card glow effect
+                        nativeCurrentCard.alpha = if (highlighted) baseAlpha else blinkAlpha
+                        nativeCurrentCard.scaleX = if (highlighted) visualStyle.animationBlinkScale else 0.994f
+                        nativeCurrentCard.scaleY = if (highlighted) visualStyle.animationBlinkScale else 0.994f
+                        
+                        // Priority badge animation
+                        nativePriorityText.alpha = if (highlighted) basePriorityAlpha else blinkPriorityAlpha
+                        nativePriorityText.scaleX = if (highlighted) visualStyle.animationPriorityScale else 1f
+                        nativePriorityText.scaleY = if (highlighted) visualStyle.animationPriorityScale else 1f
+                        
+                        // Label animation
+                        nativeCurrentLabelText.alpha = if (highlighted) 1f else 0.78f
+                        nativeCurrentLabelText.scaleX = if (highlighted) visualStyle.animationLabelScale else 1f
+                        nativeCurrentLabelText.scaleY = if (highlighted) visualStyle.animationLabelScale else 1f
+                        
+                        // Patient name subtle scale for emphasis
+                        nativePatientText.scaleX = if (highlighted) 1.015f else 1f
+                        nativePatientText.scaleY = if (highlighted) 1.015f else 1f
+                    }, index * intervalMs)
                 }
-                .start()
-        }, visualStyle.animationIntervalMs * blinkSteps + 80L)
+                
+                // Final settling pulse animation
+                mainHandler.postDelayed({
+                    nativeCurrentCard.alpha = 1f
+                    nativePriorityText.alpha = 1f
+                    nativePriorityText.scaleX = 1f
+                    nativePriorityText.scaleY = 1f
+                    nativeCurrentLabelText.alpha = 1f
+                    nativeCurrentLabelText.scaleX = 1f
+                    nativeCurrentLabelText.scaleY = 1f
+                    nativePatientText.scaleX = 1f
+                    nativePatientText.scaleY = 1f
+                    
+                    // Smooth breathing pulse at the end
+                    nativeCurrentCard.scaleX = 0.99f
+                    nativeCurrentCard.scaleY = 0.99f
+                    nativeCurrentCard.animate()
+                        .scaleX(style.pulseScale + visualStyle.animationPulseBoost)
+                        .scaleY(style.pulseScale + visualStyle.animationPulseBoost)
+                        .setDuration(320L)
+                        .setInterpolator(android.view.animation.AccelerateDecelerateInterpolator())
+                        .withEndAction {
+                            nativeCurrentCard.animate()
+                                .scaleX(1f)
+                                .scaleY(1f)
+                                .setDuration(380L)
+                                .setInterpolator(android.view.animation.DecelerateInterpolator())
+                                .start()
+                        }
+                        .start()
+                }, intervalMs * blinkSteps + 100L)
+            }
+            .start()
+    }
+
+    private fun animateHistoryRowEntry(row: View, delayMs: Long) {
+        row.alpha = 0f
+        row.translationY = dp(20).toFloat()
+        row.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setStartDelay(delayMs)
+            .setDuration(250L)
+            .setInterpolator(android.view.animation.DecelerateInterpolator())
+            .start()
     }
 
     private fun createCardDrawable(
